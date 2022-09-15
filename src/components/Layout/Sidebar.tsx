@@ -1,6 +1,11 @@
 import { Flex, Box, Text } from '@chakra-ui/layout'
 import { Logo } from '../Logo'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { Icon } from '@chakra-ui/icon'
+import { MdOutlineSpaceDashboard } from 'react-icons/md'
+import slugify from 'slugify'
+
+const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap']
 
 export const Sidebar = () => {
   return (
@@ -15,13 +20,28 @@ export const Sidebar = () => {
     >
       <Logo />
       <Box p={7}>
-        <Text fontWeight='semibold' mb={7}>
+        <Text as='h2' fontWeight='semibold' mb={7}>
           BOARDS
         </Text>
-        <Flex direction='column' gap={4}>
-          <Link to='app/platform-launch'>Platform Launch</Link>
-          <Link to='app/marketing-plan'>Marketing Plan</Link>
-          <Link to='app/roadmap'>Roadmap</Link>
+        <Flex as='ul' direction='column' gap={4}>
+          <Box as='li'>
+            <NavLink to=''>
+              <Flex align='center' gap={1.5} bg='orange.100'>
+                <Icon as={MdOutlineSpaceDashboard} />
+                <Text>Welcome</Text>
+              </Flex>
+            </NavLink>
+          </Box>
+          {boards.map((board, index) => (
+            <Box as='li' key={index}>
+              <NavLink to={slugify(board, { lower: true })}>
+                <Flex align='center' gap={1.5} bg='orange.100'>
+                  <Icon as={MdOutlineSpaceDashboard} />
+                  <Text>{board}</Text>
+                </Flex>
+              </NavLink>
+            </Box>
+          ))}
         </Flex>
       </Box>
     </Flex>

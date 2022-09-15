@@ -1,12 +1,11 @@
-import { Flex } from '@chakra-ui/layout'
-import { Main, Sidebar } from './components/Layout'
+import { AppProvider } from './providers'
+import { AppRoutes } from './routes'
 
 const App = () => {
   return (
-    <Flex h='100vh'>
-      <Sidebar />
-      <Main />
-    </Flex>
+    <AppProvider>
+      <AppRoutes />
+    </AppProvider>
   )
 }
 

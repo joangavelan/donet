@@ -5,4 +5,12 @@ const config: ThemeConfig = {
   useSystemColorMode: true
 }
 
-export const theme = extendTheme({ config })
+const styles = {
+  global: {
+    ul: {
+      listStyle: 'none'
+    }
+  }
+}
+
+export const theme = extendTheme({ config, styles })
