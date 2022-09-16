@@ -16,12 +16,15 @@
     "@chakra-ui/react": "^2.3.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@hookform/resolvers": "^2.9.8",
     "framer-motion": "^6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.35.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "6",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@types/node": "^18.7.14",

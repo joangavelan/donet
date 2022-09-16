@@ -1,3 +1,10 @@
+import { LoginForm } from '../components'
+import { Layout } from '../components/Layout'
+
 export const Login = () => {
-  return <div>Login</div>
+  return (
+    <Layout title='Log in to your account'>
+      <LoginForm />
+    </Layout>
+  )
 }
