@@ -13,4 +13,13 @@ const styles = {
   }
 }
 
-export const theme = extendTheme({ config, styles })
+const semanticTokens = {
+  colors: {
+    authButtonColor: {
+      default: 'orange.500',
+      _dark: 'orange.200'
+    }
+  }
+}
+
+export const theme = extendTheme({ config, styles, semanticTokens })
