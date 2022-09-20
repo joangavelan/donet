@@ -25,7 +25,6 @@ export const Landing = () => {
         maxW='550px'
         textAlign='center'
         gap={6}
-        color='gray.700'
         mb={20}
       >
         <Box>
@@ -38,13 +37,12 @@ export const Landing = () => {
         <Image src='/tasks.png' w={60} />
 
         <Text fontSize='lg'>
-          This project is part of my personal portfolio and you can see more
-          projects like this on my personal{' '}
+          This project is part of a personal portfolio and you can find more
+          projects like this in my{' '}
           <Link
             href='https://github.com/joangavelan'
             target='_blank'
             fontWeight='semibold'
-            color='gray.900'
           >
             github account
           </Link>
