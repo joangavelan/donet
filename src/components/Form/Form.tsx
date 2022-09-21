@@ -1,4 +1,4 @@
-import { chakra, FormControl, SystemStyleObject } from '@chakra-ui/react'
+import { chakra, SystemStyleObject } from '@chakra-ui/react'
 import {
   useForm,
   UseFormReturn,
@@ -8,7 +8,6 @@ import {
 } from 'react-hook-form'
 import { Schema } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { hasProperties } from '@/utils'
 
 type FormProps<TFormValues extends FieldValues> = {
   children: (methods: UseFormReturn<TFormValues>) => React.ReactNode
@@ -32,9 +31,7 @@ export const Form = <TFormValues extends Record<string, unknown>>({
 
   return (
     <chakra.form onSubmit={methods.handleSubmit(onSubmit)} sx={sx}>
-      <FormControl isInvalid={hasProperties(methods.formState.errors)}>
-        {children(methods)}
-      </FormControl>
+      {children(methods)}
     </chakra.form>
   )
 }

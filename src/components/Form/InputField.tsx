@@ -3,8 +3,8 @@ import {
   FormLabel,
   Input,
   FormErrorMessage,
-  Box,
-  SystemStyleObject
+  SystemStyleObject,
+  FormControl
 } from '@chakra-ui/react'
 import { HTMLInputTypeAttribute } from 'react'
 
@@ -28,10 +28,10 @@ export const InputField = ({
   sx
 }: InputFieldProps) => {
   return (
-    <Box sx={sx}>
+    <FormControl isInvalid={!!error} sx={sx}>
       {label && <FormLabel htmlFor={id}>{label}</FormLabel>}
       <Input id={id} type={type} placeholder={placeholder} {...registration} />
       <FormErrorMessage>{error?.message}</FormErrorMessage>
-    </Box>
+    </FormControl>
   )
 }
