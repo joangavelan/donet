@@ -1,3 +1,4 @@
+import { supabase } from '@/lib/supabase'
 import { Button } from '@chakra-ui/button'
 import { Icon } from '@chakra-ui/icon'
 import { Image } from '@chakra-ui/image'
@@ -7,7 +8,7 @@ import { useNavigate } from 'react-router'
 
 export const Landing = () => {
   const navigate = useNavigate()
-  const user = false
+  const user = supabase.auth.user()
 
   const handleStart = () => {
     if (user) {

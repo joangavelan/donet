@@ -4,10 +4,10 @@ export const Register = () => {
   return (
     <Layout title='Register your account'>
       <AuthForm
-        googleAuthButtonText='Sign up with Google'
+        method='signUp'
         submitButtonText='Sign Up'
         question='Already have an account?'
-        link={{ text: 'Sign in', href: '../login' }}
+        toggleLink={{ text: 'Sign in', href: '../login' }}
       />
     </Layout>
   )

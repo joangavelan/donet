@@ -27,6 +27,8 @@ module.exports = {
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/no-misused-promises': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
+    'no-throw-literal': 'off',
+    '@typescript-eslint/no-throw-literal': 'off',
     'react/no-unescaped-entities': 'off'
   },
   ignorePatterns: ['vite.config.ts']

@@ -1,10 +1,11 @@
 import { Landing } from '@/features/misc'
+import { supabase } from '@/lib/supabase'
 import { useRoutes } from 'react-router'
 import { protectedRoutes } from './protected'
 import { publicRoutes } from './public'
 
 export const AppRoutes = () => {
-  const user = false
+  const user = supabase.auth.user()
 
   const commonRoutes = [{ path: '/', element: <Landing /> }]
 

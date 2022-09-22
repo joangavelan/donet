@@ -1,38 +1,54 @@
-import { Button, Text, VStack, Stack } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
-import { InputField, GoogleAuthButton, Form } from '@/components/Form'
+import { Button, Text, Stack, VStack } from '@chakra-ui/react'
+import { Link, useNavigate } from 'react-router-dom'
+import { InputField, Form } from '@/components/Form'
 import * as z from 'zod'
+import { supabase } from '@/lib/supabase'
+import { useNotifications } from '@/hooks/useNotifications'
 
 const schema = z.object({
   email: z.string().min(1, 'Required').email(),
-  password: z.string().min(1, 'Required')
+  password: z
+    .string()
+    .trim()
+    .min(1, 'Required')
+    .min(6, 'Password must be at least 6 characters')
 })
 
 type FormValues = z.infer<typeof schema>
 
 type AuthFormProps = {
-  googleAuthButtonText: string
   submitButtonText: string
   question: string
-  link: {
-    text: string
-    href: string
-  }
+  toggleLink: { text: string; href: string }
+  method: 'signIn' | 'signUp'
 }
 
 export const AuthForm = ({
-  googleAuthButtonText,
   submitButtonText,
   question,
-  link
+  toggleLink,
+  method
 }: AuthFormProps) => {
+  const navigate = useNavigate()
+  const showNotification = useNotifications()
+
   return (
     <Stack gap={4}>
-      <GoogleAuthButton text={googleAuthButtonText} />
-
       <Form<FormValues>
         schema={schema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={async ({ email, password }) => {
+          const { error } = await supabase.auth[method]({
+            email,
+            password
+          })
+
+          if (error) {
+            showNotification('error', error.message)
+            throw error
+          }
+
+          navigate('/app')
+        }}
       >
         {({ register, formState }) => (
           <Stack gap={2}>
@@ -50,7 +66,11 @@ export const AuthForm = ({
               registration={register('password')}
               type='password'
             />
-            <Button type='submit' w='full' colorScheme='orange'>
+            <Button
+              type='submit'
+              colorScheme='orange'
+              isLoading={formState.isSubmitting}
+            >
               {submitButtonText}
             </Button>
           </Stack>
@@ -61,11 +81,11 @@ export const AuthForm = ({
         <Text>{question}</Text>
         <Text
           as={Link}
-          to={link.href}
+          to={toggleLink.href}
           color='authButtonColor'
           _hover={{ textDecoration: 'underline' }}
         >
-          {link.text}
+          {toggleLink.text}
         </Text>
       </VStack>
     </Stack>
