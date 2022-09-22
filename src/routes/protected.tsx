@@ -1,7 +1,8 @@
-import { Box, Flex } from '@chakra-ui/layout'
+import { Flex } from '@chakra-ui/layout'
 import { Main, Sidebar } from '@/components/Layout'
 import { Board } from '@/features/board/components'
 import { Outlet } from 'react-router'
+import { Welcome } from '@/features/misc/routes/Welcome'
 
 export const App = () => {
   return (
@@ -21,7 +22,7 @@ export const protectedRoutes = [
     children: [
       {
         path: '',
-        element: <Box>Hola</Box>
+        element: <Welcome />
       },
       {
         path: ':board',
