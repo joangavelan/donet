@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { InputField, Form } from '@/components/Form'
 import * as z from 'zod'
 import { supabase } from '@/lib/supabase'
-import { useNotifications } from '@/hooks/useNotifications'
+import { useNotification } from '@/hooks/useNotification'
 
 const schema = z.object({
   email: z.string().min(1, 'Required').email(),
@@ -29,8 +29,8 @@ export const AuthForm = ({
   toggleLink,
   method
 }: AuthFormProps) => {
+  const showNotification = useNotification()
   const navigate = useNavigate()
-  const showNotification = useNotifications()
 
   return (
     <Stack gap={4}>
@@ -43,7 +43,7 @@ export const AuthForm = ({
           })
 
           if (error) {
-            showNotification('error', error.message)
+            showNotification({ type: 'error', message: error.message })
             throw error
           }
 

@@ -1,6 +1,11 @@
 import { useToast, UseToastOptions } from '@chakra-ui/react'
 
-export const useNotifications = () => {
+type Notification = {
+  type: UseToastOptions['status']
+  message: string
+}
+
+export const useNotification = () => {
   const defaultOptions: UseToastOptions = {
     duration: 4000,
     isClosable: true,
@@ -9,6 +14,6 @@ export const useNotifications = () => {
 
   const toast = useToast(defaultOptions)
 
-  return (type: UseToastOptions['status'], message: string) =>
+  return ({ type, message }: Notification) =>
     toast({ status: type, description: message })
 }
