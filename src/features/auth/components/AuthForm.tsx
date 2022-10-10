@@ -1,5 +1,5 @@
-import { Button, Text, Stack, VStack } from '@chakra-ui/react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Button, Stack } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 import { InputField, Form } from '@/components/Form'
 import * as z from 'zod'
 import { supabase } from '@/lib/supabase'
@@ -17,18 +17,11 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>
 
 type AuthFormProps = {
-  submitButtonText: string
-  question: string
-  toggleLink: { text: string; href: string }
   method: 'signIn' | 'signUp'
+  submitButtonText: string
 }
 
-export const AuthForm = ({
-  submitButtonText,
-  question,
-  toggleLink,
-  method
-}: AuthFormProps) => {
+export const AuthForm = ({ method, submitButtonText }: AuthFormProps) => {
   const showNotification = useNotification()
   const navigate = useNavigate()
 
@@ -76,18 +69,6 @@ export const AuthForm = ({
           </Stack>
         )}
       </Form>
-
-      <VStack>
-        <Text>{question}</Text>
-        <Text
-          as={Link}
-          to={toggleLink.href}
-          color='authButtonColor'
-          _hover={{ textDecoration: 'underline' }}
-        >
-          {toggleLink.text}
-        </Text>
-      </VStack>
     </Stack>
   )
 }

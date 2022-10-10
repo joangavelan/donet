@@ -1,5 +1,4 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Image, Stack, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
 type LayoutProps = {
@@ -9,16 +8,20 @@ type LayoutProps = {
 
 export const Layout = ({ title, children }: LayoutProps) => {
   return (
-    <Flex align='center' justify='center' h='100vh'>
-      <Box mb={20}>
-        <Link to='/'>
-          <Image src='/tasks.png' w={130} marginX='auto' mb={4} />
-        </Link>
-        <Text as='h1' fontSize='3xl' fontWeight='bold' mb={5}>
-          {title}
-        </Text>
-        <Box>{children}</Box>
-      </Box>
-    </Flex>
+    <Box h='100vh'>
+      <Stack gap={4} maxW={320} m='auto' pos='relative' top='17%'>
+        <Stack>
+          <Link to='/'>
+            <Image src='/tasks.png' w={130} marginX='auto' />
+          </Link>
+
+          <Text as='h1' fontSize='3xl' fontWeight='bold' textAlign='center'>
+            {title}
+          </Text>
+        </Stack>
+
+        {children}
+      </Stack>
+    </Box>
   )
 }
