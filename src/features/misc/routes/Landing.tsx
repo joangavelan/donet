@@ -1,8 +1,6 @@
 import { supabase } from '@/lib/supabase'
 import { Button } from '@chakra-ui/button'
-import { Icon } from '@chakra-ui/icon'
-import { Image } from '@chakra-ui/image'
-import { Flex, Box, Text, Link } from '@chakra-ui/layout'
+import { Flex, Box, Text, Link, Image, Icon, VStack } from '@chakra-ui/react'
 import { AiOutlineHome, AiOutlineGithub } from 'react-icons/ai'
 import { useNavigate } from 'react-router'
 
@@ -19,25 +17,29 @@ export const Landing = () => {
   }
 
   return (
-    <Flex align='center' justify='center' h='100vh'>
-      <Flex
-        direction='column'
-        align='center'
+    <Flex h='100vh'>
+      <VStack
         maxW='550px'
+        h='min-content'
+        mx='auto'
+        pos='relative'
+        top='18%'
         textAlign='center'
         gap={6}
-        mb={20}
+        p={6}
       >
         <Box>
-          <Text as='h1' fontSize='4xl' fontWeight='extrabold'>
+          <Text as='h1' fontSize={['3xl', '4xl']} fontWeight='extrabold'>
             Welcome to Donet!
           </Text>
-          <Text fontSize='lg'>Your centralized task management app.</Text>
+          <Text fontSize={['md', 'lg']}>
+            Your centralized task management app.
+          </Text>
         </Box>
 
-        <Image src='/tasks.png' w={60} />
+        <Image src='/tasks.png' w={[52, 60]} />
 
-        <Text fontSize='lg'>
+        <Text fontSize={['md', 'lg']}>
           This project is part of a personal portfolio. You can find more
           projects like this on my personal{' '}
           <Link
@@ -50,7 +52,7 @@ export const Landing = () => {
           .
         </Text>
 
-        <Flex gap={8}>
+        <Flex gap={[6, 8]}>
           <Button colorScheme='orange' onClick={handleStart}>
             <Icon as={AiOutlineHome} />
             <Text as='span' ml={1.5}>
@@ -68,7 +70,7 @@ export const Landing = () => {
             </Text>
           </Button>
         </Flex>
-      </Flex>
+      </VStack>
     </Flex>
   )
 }
