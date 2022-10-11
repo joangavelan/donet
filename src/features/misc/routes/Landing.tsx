@@ -38,8 +38,8 @@ export const Landing = () => {
         <Image src='/tasks.png' w={60} />
 
         <Text fontSize='lg'>
-          This project is part of a personal portfolio and you can find more
-          projects like this in my{' '}
+          This project is part of a personal portfolio. You can find more
+          projects like this on my personal{' '}
           <Link
             href='https://github.com/joangavelan'
             target='_blank'
