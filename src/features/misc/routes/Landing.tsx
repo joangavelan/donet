@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/supabase'
 import { Button } from '@chakra-ui/button'
 import { Flex, Box, Text, Link, Image, Icon, VStack } from '@chakra-ui/react'
+import { Helmet } from 'react-helmet-async'
 import { AiOutlineHome, AiOutlineGithub } from 'react-icons/ai'
 import { useNavigate } from 'react-router'
 
@@ -18,6 +19,10 @@ export const Landing = () => {
 
   return (
     <Flex h='100vh'>
+      <Helmet>
+        <title>Donet | Task Management App</title>
+      </Helmet>
+
       <VStack
         maxW='550px'
         h='min-content'
