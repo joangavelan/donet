@@ -1,6 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { theme } from '@/theme'
+import { HelmetProvider } from 'react-helmet-async'
 
 type AppProviderProps = {
   children: React.ReactNode
@@ -9,7 +10,9 @@ type AppProviderProps = {
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <ChakraProvider theme={theme}>
-      <Router>{children}</Router>
+      <HelmetProvider>
+        <Router>{children}</Router>
+      </HelmetProvider>
     </ChakraProvider>
   )
 }
