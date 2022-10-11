@@ -58,7 +58,7 @@ export const Main = ({ children }: MainProps) => {
           </Menu>
         </Flex>
       </Flex>
-      {/* content */}
+      {/* content (boards outlet) */}
       <Box flex={1} p={5}>
         {children}
       </Box>
