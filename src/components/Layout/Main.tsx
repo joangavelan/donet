@@ -1,16 +1,18 @@
-import { Button, IconButton } from '@chakra-ui/button'
-import { Box, Flex, Text } from '@chakra-ui/layout'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { useNavigate, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import {
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider
+  MenuDivider,
+  Button,
+  IconButton,
+  Box,
+  Flex,
+  Text
 } from '@chakra-ui/react'
-import { supabase } from '@/lib/supabase'
-import { useNotification } from '@/hooks/useNotification'
+import { useLogout } from '@/features/auth/hooks'
 
 type MainProps = {
   children: React.ReactNode
@@ -18,17 +20,7 @@ type MainProps = {
 
 export const Main = ({ children }: MainProps) => {
   const { board } = useParams()
-  const showNotification = useNotification()
-  const navigate = useNavigate()
-
-  const signOut = async () => {
-    const { error } = await supabase.auth.signOut()
-    if (error) {
-      showNotification({ type: 'error', message: error.message })
-      throw error
-    }
-    navigate('/auth/login')
-  }
+  const logoutMutation = useLogout()
 
   return (
     <Flex as='main' flex={1} direction='column'>
@@ -53,7 +45,9 @@ export const Main = ({ children }: MainProps) => {
             <MenuList>
               <MenuItem>Delete Board</MenuItem>
               <MenuDivider />
-              <MenuItem onClick={signOut}>Sign Out</MenuItem>
+              <MenuItem onClick={() => logoutMutation.mutate()}>
+                Sign Out
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>
