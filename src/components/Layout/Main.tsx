@@ -25,33 +25,36 @@ export const Main = ({ children }: MainProps) => {
   return (
     <Flex as='main' flex={1} direction='column'>
       {/* header */}
-      <Flex
-        as='header'
-        align='center'
-        justify='space-between'
-        h='100px'
-        px={7}
-        bg='whiteAlpha.200'
-        borderBottom='1px'
-        borderColor='gray.200'
-      >
-        <Text fontSize='2xl' fontWeight='semibold'>
-          {board ?? 'Welcome!'}
-        </Text>
-        <Flex align='center' gap={3}>
-          <Button>Add New Task</Button>
-          <Menu>
-            <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} />
-            <MenuList>
-              <MenuItem>Delete Board</MenuItem>
-              <MenuDivider />
-              <MenuItem onClick={() => logoutMutation.mutate()}>
-                Sign Out
-              </MenuItem>
-            </MenuList>
-          </Menu>
+      {board && (
+        <Flex
+          as='header'
+          align='center'
+          justify='space-between'
+          h='100px'
+          px={7}
+          bg='whiteAlpha.200'
+          borderBottom='1px'
+          borderColor='gray.200'
+        >
+          <Text fontSize='2xl' fontWeight='semibold'>
+            {board}
+          </Text>
+          <Flex align='center' gap={3}>
+            <Button>Add New Task</Button>
+            <Menu>
+              <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} />
+              <MenuList>
+                <MenuItem>Delete Board</MenuItem>
+                <MenuDivider />
+                <MenuItem onClick={() => logoutMutation.mutate()}>
+                  Sign Out
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </Flex>
         </Flex>
-      </Flex>
+      )}
+
       {/* content (boards outlet) */}
       <Box flex={1} p={5}>
         {children}

@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { Box, Flex } from '@chakra-ui/layout'
 import { Main, Sidebar } from '@/components/Layout'
 import { Board } from '@/features/board/components'
 import { Outlet } from 'react-router'
-import { Welcome } from '@/features/misc/components'
-import { useDisclosure } from '@chakra-ui/react'
+import { NoBoards, Welcome } from '@/features/misc/components'
+import { Flex, useDisclosure } from '@chakra-ui/react'
 import { useQueryClient } from 'react-query'
 
 export const App = () => {
@@ -40,7 +39,7 @@ export const protectedRoutes = [
     children: [
       {
         path: '',
-        element: <Box>Empty</Box>
+        element: <NoBoards />
       },
       {
         path: ':board',
