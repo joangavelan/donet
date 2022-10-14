@@ -1,4 +1,3 @@
-import { supabase } from '@/lib/supabase'
 import {
   Button,
   ListItem,
@@ -11,7 +10,9 @@ import {
   Text,
   UnorderedList
 } from '@chakra-ui/react'
-import { useRef } from 'react'
+import { useQueryClient } from 'react-query'
+import type { User } from '@supabase/supabase-js'
+import * as React from 'react'
 
 const features = [
   'Create your own boards',
@@ -29,30 +30,27 @@ type WelcomeProps = {
 }
 
 export const Welcome = ({ isOpen, onClose }: WelcomeProps) => {
-  const user = supabase.auth.user()
-  // used to prevent autofocus on first tabable element (continue button)
-  const initialRef = useRef(null)
+  const user = useQueryClient().getQueryData(['user']) as User
+  const userFullName = user?.user_metadata.full_name
+
+  // this ref will be used as a workaround to prevent autofocus on the first tabable element (continue button) when the modal pops up
+  const initialRef = React.useRef(null)
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
       <ModalOverlay />
       <ModalContent py={2} top='12%' ref={initialRef}>
-        <ModalHeader textAlign='center' fontSize='2xl' fontWeight='bold'>
-          Welcome to Donet!
+        <ModalHeader
+          textAlign='center'
+          fontSize='2xl'
+          fontWeight='bold'
+          textTransform='capitalize'
+        >
+          Welcome {userFullName}!
         </ModalHeader>
 
         <ModalBody>
-          <Text lineHeight={2}>
-            You have logged in as{' '}
-            <Text as='span' fontWeight='semibold'>
-              {user?.email}
-            </Text>
-            .
-          </Text>
-
-          <Text lineHeight={2} my={1.5}>
-            In this app you will be able to:
-          </Text>
+          <Text mb={3}>In this app you will be able to:</Text>
           <UnorderedList lineHeight={1.7}>
             {features.map((feature, index) => (
               <ListItem key={index}>{feature}</ListItem>

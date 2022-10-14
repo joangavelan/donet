@@ -3,23 +3,19 @@ import { Box, Flex } from '@chakra-ui/layout'
 import { Main, Sidebar } from '@/components/Layout'
 import { Board } from '@/features/board/components'
 import { Outlet } from 'react-router'
-import { Welcome } from '@/features/misc/components/Welcome'
+import { Welcome } from '@/features/misc/components'
 import { useDisclosure } from '@chakra-ui/react'
-import { supabase } from '@/lib/supabase'
+import { useQueryClient } from 'react-query'
 
 export const App = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const user = supabase.auth.user()
+  const { isOpen, onOpen: openWelcomeModal, onClose } = useDisclosure()
+  const queryClient = useQueryClient()
+  const newUser = queryClient.getQueryData('new-user')
 
   React.useEffect(() => {
-    async function updateUser() {
-      const { error } = await supabase.auth.update({ data: { welcomed: true } })
-      if (error) throw error
-    }
-
-    if (!user?.user_metadata.welcomed) {
-      onOpen()
-      void updateUser()
+    if (newUser) {
+      openWelcomeModal()
+      queryClient.removeQueries(['new-user'])
     }
   }, [])
 
