@@ -1,10 +1,10 @@
-import { Layout, AuthForm, Redirects, Header } from '../components'
+import { Layout, Redirects, Header, LoginForm } from '../components'
 
 export const Login = () => {
   return (
     <Layout title='Login'>
       <Header title='Login to your account' />
-      <AuthForm method='signIn' submitButtonText='Sign In' />
+      <LoginForm />
       <Redirects
         question="Don't have an account?"
         toggleLink={{ text: 'Sign up', href: '../register' }}

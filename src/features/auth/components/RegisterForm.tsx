@@ -1,11 +1,14 @@
 import { Button, Stack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import { InputField, Form } from '@/components/Form'
+import { Form, InputField } from '@/components/Form'
 import * as z from 'zod'
-import { supabase } from '@/lib/supabase'
+import { useMutation, useQueryClient } from 'react-query'
+import { AuthApiError } from '@supabase/supabase-js'
 import { useNotification } from '@/hooks/useNotification'
+import { signUp } from '../api/signUp'
 
 const schema = z.object({
+  fullName: z.string().trim().min(1, 'Required'),
   email: z.string().min(1, 'Required').email(),
   password: z
     .string()
@@ -16,35 +19,42 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
-type AuthFormProps = {
-  method: 'signIn' | 'signUp'
-  submitButtonText: string
-}
-
-export const AuthForm = ({ method, submitButtonText }: AuthFormProps) => {
-  const showNotification = useNotification()
+export const RegisterForm = () => {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
+  const registerMutation = useMutation(signUp)
+  const showNotification = useNotification()
 
   return (
     <Stack gap={4}>
       <Form<FormValues>
         schema={schema}
-        onSubmit={async ({ email, password }) => {
-          const { error } = await supabase.auth[method]({
-            email,
-            password
-          })
-
-          if (error) {
-            showNotification({ type: 'error', message: error.message })
-            throw error
-          }
-
-          navigate('/app')
+        onSubmit={async ({ fullName, email, password }) => {
+          await registerMutation.mutateAsync(
+            { fullName, email, password },
+            {
+              onError: (error) => {
+                const { message } = error as AuthApiError
+                showNotification({ type: 'error', message })
+              },
+              onSuccess: (user) => {
+                queryClient.setQueryData(['user'], user)
+                queryClient.setQueryData(['new-user'], true)
+                navigate('/app')
+              }
+            }
+          )
         }}
       >
         {({ register, formState }) => (
           <Stack gap={2}>
+            <InputField
+              id='fullName'
+              label='Full Name'
+              error={formState.errors.fullName}
+              registration={register('fullName')}
+              type='text'
+            />
             <InputField
               id='email'
               label='Email Address'
@@ -64,7 +74,7 @@ export const AuthForm = ({ method, submitButtonText }: AuthFormProps) => {
               colorScheme='orange'
               isLoading={formState.isSubmitting}
             >
-              {submitButtonText}
+              Sign Up
             </Button>
           </Stack>
         )}
