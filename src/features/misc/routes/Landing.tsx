@@ -1,13 +1,21 @@
-import { supabase } from '@/lib/supabase'
-import { Button } from '@chakra-ui/button'
-import { Flex, Box, Text, Link, Image, Icon, VStack } from '@chakra-ui/react'
+import {
+  Flex,
+  Box,
+  Text,
+  Link,
+  Image,
+  Icon,
+  VStack,
+  Button
+} from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 import { AiOutlineHome, AiOutlineGithub } from 'react-icons/ai'
+import { useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router'
 
 export const Landing = () => {
   const navigate = useNavigate()
-  const user = supabase.auth.user()
+  const user = useQueryClient().getQueryData('user')
 
   const handleStart = () => {
     if (user) {

@@ -1,11 +1,11 @@
 import { Landing } from '@/features/misc'
-import { supabase } from '@/lib/supabase'
+import { useQueryClient } from 'react-query'
 import { useRoutes } from 'react-router'
 import { protectedRoutes } from './protected'
 import { publicRoutes } from './public'
 
 export const AppRoutes = () => {
-  const user = supabase.auth.user()
+  const user = useQueryClient().getQueryData(['user'])
 
   const commonRoutes = [{ path: '/', element: <Landing /> }]
 
