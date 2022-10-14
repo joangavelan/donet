@@ -3,6 +3,7 @@ import { Logo } from '../Logo'
 import { NavLink } from 'react-router-dom'
 import { Icon } from '@chakra-ui/icon'
 import { MdOutlineSpaceDashboard } from 'react-icons/md'
+import { FiPlusSquare } from 'react-icons/fi'
 import slugify from 'slugify'
 
 const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap']
@@ -19,29 +20,36 @@ export const Sidebar = () => {
       borderColor='gray.200'
     >
       <Logo />
+
       <Box p={7}>
         <Text as='h2' fontWeight='semibold' mb={7}>
           BOARDS
         </Text>
-        <Flex as='ul' direction='column' gap={4}>
-          <Box as='li'>
-            <NavLink to=''>
-              <Flex align='center' gap={1.5} bg='orange.100'>
-                <Icon as={MdOutlineSpaceDashboard} />
-                <Text>Welcome</Text>
-              </Flex>
-            </NavLink>
-          </Box>
+
+        <Flex as='ul' direction='column' gap={3} mb={3}>
           {boards.map((board, index) => (
-            <Box as='li' key={index}>
+            <Box as='li' key={index} _hover={{ color: '#C05521' }}>
               <NavLink to={slugify(board, { lower: true })}>
-                <Flex align='center' gap={1.5} bg='orange.100'>
+                <Flex alignItems='center' gap={2.5}>
                   <Icon as={MdOutlineSpaceDashboard} />
                   <Text>{board}</Text>
                 </Flex>
               </NavLink>
             </Box>
           ))}
+        </Flex>
+
+        <Flex
+          alignItems='center'
+          gap={2.5}
+          color='#DE6A1F'
+          _hover={{ color: '#C05521' }}
+          cursor='pointer'
+          transitionDuration='150ms'
+          fontWeight='medium'
+        >
+          <Icon as={FiPlusSquare} />
+          <Text>Create New Board</Text>
         </Flex>
       </Box>
     </Flex>
