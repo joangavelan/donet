@@ -1,14 +1,23 @@
-import { Flex, Box, Text } from '@chakra-ui/layout'
+import { useColorMode, Flex, Box, Text, HStack, Icon } from '@chakra-ui/react'
 import { Logo } from '../Logo'
 import { NavLink } from 'react-router-dom'
-import { Icon } from '@chakra-ui/icon'
 import { MdOutlineSpaceDashboard } from 'react-icons/md'
-import { FiPlusSquare } from 'react-icons/fi'
+import { AiOutlinePlusSquare } from 'react-icons/ai'
 import slugify from 'slugify'
 
 const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap']
 
 export const Sidebar = () => {
+  const { colorMode } = useColorMode()
+
+  const activeStyles = {
+    background: `linear-gradient(to right, #FD7700, ${
+      colorMode === 'light' ? '#ab8300' : '#FFD302'
+    })`,
+    backgroundClip: 'text',
+    color: 'transparent'
+  }
+
   return (
     <Flex
       as='aside'
@@ -22,34 +31,37 @@ export const Sidebar = () => {
       <Logo />
 
       <Box p={7}>
-        <Text as='h2' fontWeight='semibold' mb={7}>
-          BOARDS
-        </Text>
+        <HStack justifyContent='space-between' mb={7}>
+          <Text as='h2' fontWeight='semibold' _hover={{ color: 'orange.400' }}>
+            <NavLink to='/app'>BOARDS</NavLink>
+          </Text>
+          <Icon
+            as={AiOutlinePlusSquare}
+            color={colorMode === 'light' ? 'blackAlpha.800' : 'whiteAlpha.800'}
+            boxSize='1.3rem'
+            cursor='pointer'
+            _hover={{ color: 'orange.400' }}
+          />
+        </HStack>
 
-        <Flex as='ul' direction='column' gap={3} mb={3}>
+        <Flex as='ul' direction='column' gap={4}>
           {boards.map((board, index) => (
-            <Box as='li' key={index} _hover={{ color: '#C05521' }}>
+            <Box as='li' key={index}>
               <NavLink to={slugify(board, { lower: true })}>
-                <Flex alignItems='center' gap={2.5}>
-                  <Icon as={MdOutlineSpaceDashboard} />
-                  <Text>{board}</Text>
-                </Flex>
+                {({ isActive }) => (
+                  <HStack _hover={{ color: '#FF6200' }}>
+                    <Icon
+                      as={MdOutlineSpaceDashboard}
+                      color={isActive ? '#FF6301' : 'currentColor'}
+                    />
+                    <Text sx={isActive ? activeStyles : undefined}>
+                      {board}
+                    </Text>
+                  </HStack>
+                )}
               </NavLink>
             </Box>
           ))}
-        </Flex>
-
-        <Flex
-          alignItems='center'
-          gap={2.5}
-          color='#DE6A1F'
-          _hover={{ color: '#C05521' }}
-          cursor='pointer'
-          transitionDuration='150ms'
-          fontWeight='medium'
-        >
-          <Icon as={FiPlusSquare} />
-          <Text>Create New Board</Text>
         </Flex>
       </Box>
     </Flex>
