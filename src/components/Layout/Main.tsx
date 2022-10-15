@@ -40,7 +40,7 @@ export const Main = ({ children }: MainProps) => {
             {board}
           </Text>
           <Flex align='center' gap={3}>
-            <Button>Add New Task</Button>
+            <Button colorScheme='orange'>Add New Task</Button>
             <Menu>
               <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} />
               <MenuList>
