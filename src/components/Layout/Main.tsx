@@ -32,9 +32,9 @@ export const Main = ({ children }: MainProps) => {
           justify='space-between'
           h='100px'
           px={7}
-          bg='whiteAlpha.200'
+          bg='whiteAlpha.100'
           borderBottom='1px'
-          borderColor='gray.200'
+          borderColor='whiteAlpha.200'
         >
           <Text fontSize='2xl' fontWeight='semibold'>
             {board}

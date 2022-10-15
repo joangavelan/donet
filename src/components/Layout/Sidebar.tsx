@@ -17,7 +17,7 @@ export const Sidebar = () => {
       maxW='500px'
       direction='column'
       borderRight='1px'
-      borderColor='gray.200'
+      borderColor='whiteAlpha.200'
     >
       <Logo />
 
