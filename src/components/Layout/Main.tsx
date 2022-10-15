@@ -10,7 +10,8 @@ import {
   IconButton,
   Box,
   Flex,
-  Text
+  Text,
+  useColorMode
 } from '@chakra-ui/react'
 import { useLogout } from '@/features/auth/hooks'
 
@@ -21,6 +22,7 @@ type MainProps = {
 export const Main = ({ children }: MainProps) => {
   const { board } = useParams()
   const logoutMutation = useLogout()
+  const { colorMode } = useColorMode()
 
   return (
     <Flex as='main' flex={1} direction='column'>
@@ -34,7 +36,9 @@ export const Main = ({ children }: MainProps) => {
           px={7}
           bg='whiteAlpha.100'
           borderBottom='1px'
-          borderColor='whiteAlpha.200'
+          borderColor={
+            colorMode === 'light' ? 'blackAlpha.200' : 'whiteAlpha.200'
+          }
         >
           <Text fontSize='2xl' fontWeight='semibold'>
             {board}
