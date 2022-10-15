@@ -1,15 +1,15 @@
-import { Image } from '@chakra-ui/image'
-import { Box, Flex, Text } from '@chakra-ui/layout'
+import { Grid, HStack, Text, Image } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 export const Logo = () => {
   return (
-    <Flex align='center' justify='center' w='full' h='100px' gap={1.5}>
-      <Box boxSize={10}>
-        <Image src='/tasks.png' alt='checklist' />
-      </Box>
-      <Text fontSize={30} fontWeight='semibold'>
-        Donet
-      </Text>
-    </Flex>
+    <Grid placeItems='center' h='100px'>
+      <HStack as={Link} to='/'>
+        <Image src='/tasks.png' alt='checklist logo' boxSize={10} />
+        <Text fontSize={30} fontWeight='semibold'>
+          Donet
+        </Text>
+      </HStack>
+    </Grid>
   )
 }
