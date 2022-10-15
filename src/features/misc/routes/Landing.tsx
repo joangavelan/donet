@@ -50,7 +50,7 @@ export const Landing = () => {
           </Text>
         </Box>
 
-        <Image src='/tasks.png' w={[52, 60]} />
+        <Image src='/checklist.png' w={[52, 60]} alt='checklist logo' />
 
         <Text fontSize={['md', 'lg']}>
           This project is part of a personal portfolio. You can find more

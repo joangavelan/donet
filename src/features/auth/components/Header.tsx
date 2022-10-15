@@ -5,7 +5,7 @@ export const Header = ({ title }: { title: string }) => {
   return (
     <Stack as='header'>
       <Link to='/'>
-        <Image src='/tasks.png' w={130} marginX='auto' />
+        <Image src='/checklist.png' w={130} marginX='auto' />
       </Link>
 
       <Text as='h1' fontSize='3xl' fontWeight='bold' textAlign='center'>
