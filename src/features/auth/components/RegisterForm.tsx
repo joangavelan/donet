@@ -40,7 +40,7 @@ export const RegisterForm = () => {
               onSuccess: (user) => {
                 queryClient.setQueryData(['user'], user)
                 queryClient.setQueryData(['new-user'], true)
-                navigate('/app')
+                navigate('/boards')
               }
             }
           )

@@ -1,4 +1,12 @@
-import { useColorMode, Flex, Box, Text, HStack, Icon } from '@chakra-ui/react'
+import {
+  useColorMode,
+  Flex,
+  Box,
+  Text,
+  HStack,
+  Icon,
+  GridItem
+} from '@chakra-ui/react'
 import { Logo } from '../Logo'
 import { NavLink } from 'react-router-dom'
 import { MdOutlineSpaceDashboard } from 'react-icons/md'
@@ -19,12 +27,9 @@ export const Sidebar = () => {
   }
 
   return (
-    <Flex
+    <GridItem
       as='aside'
-      h='full'
-      w='30%'
-      maxW='500px'
-      direction='column'
+      area='aside'
       borderRight='1px'
       borderColor={colorMode === 'light' ? 'blackAlpha.200' : 'whiteAlpha.200'}
     >
@@ -33,7 +38,7 @@ export const Sidebar = () => {
       <Box p={7}>
         <HStack justifyContent='space-between' mb={7}>
           <Text as='h2' fontWeight='semibold' _hover={{ color: 'orange.400' }}>
-            <NavLink to='/app'>BOARDS</NavLink>
+            <NavLink to='/boards'>BOARDS</NavLink>
           </Text>
           <Icon
             as={AiOutlinePlusSquare}
@@ -41,6 +46,7 @@ export const Sidebar = () => {
             boxSize='1.3rem'
             cursor='pointer'
             _hover={{ color: 'orange.400' }}
+            title='new board'
           />
         </HStack>
 
@@ -52,7 +58,7 @@ export const Sidebar = () => {
                   <HStack _hover={{ color: '#FF6200' }}>
                     <Icon
                       as={MdOutlineSpaceDashboard}
-                      color={isActive ? '#FF6301' : 'currentColor'}
+                      color={isActive ? '#FF6200' : 'currentColor'}
                     />
                     <Text sx={isActive ? activeStyles : undefined}>
                       {board}
@@ -64,6 +70,6 @@ export const Sidebar = () => {
           ))}
         </Flex>
       </Box>
-    </Flex>
+    </GridItem>
   )
 }

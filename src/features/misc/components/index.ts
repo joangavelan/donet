@@ -1,2 +1,2 @@
-export * from './NoBoards'
+export * from './Boards'
 export * from './Welcome'

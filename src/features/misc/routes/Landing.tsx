@@ -19,7 +19,7 @@ export const Landing = () => {
 
   const handleStart = () => {
     if (user) {
-      navigate('/app')
+      navigate('/boards')
     } else {
       navigate('/auth/login')
     }

@@ -38,7 +38,7 @@ export const LoginForm = () => {
               },
               onSuccess: (user) => {
                 queryClient.setQueryData(['user'], user)
-                navigate('/app')
+                navigate('/boards')
               }
             }
           )

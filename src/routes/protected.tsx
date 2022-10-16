@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { Main, Sidebar } from '@/components/Layout'
+import { AppContainer, Header, Main, Sidebar } from '@/components/Layout'
 import { Board } from '@/features/board/components'
 import { Outlet } from 'react-router'
-import { NoBoards, Welcome } from '@/features/misc/components'
-import { Flex, useDisclosure } from '@chakra-ui/react'
+import { Boards, Welcome } from '@/features/misc/components'
+import { useDisclosure } from '@chakra-ui/react'
 import { useQueryClient } from 'react-query'
 
-export const App = () => {
+const App = () => {
   const { isOpen, onOpen: openWelcomeModal, onClose } = useDisclosure()
   const queryClient = useQueryClient()
   const newUser = queryClient.getQueryData('new-user')
@@ -19,27 +19,27 @@ export const App = () => {
   }, [])
 
   return (
-    <>
-      <Welcome isOpen={isOpen} onClose={onClose} />
+    <AppContainer>
+      <Sidebar />
+      <Header />
+      <Main>
+        <Outlet />
+      </Main>
 
-      <Flex h='100vh'>
-        <Sidebar />
-        <Main>
-          <Outlet />
-        </Main>
-      </Flex>
-    </>
+      {/* welcome modal that pops up for new users */}
+      <Welcome isOpen={isOpen} onClose={onClose} />
+    </AppContainer>
   )
 }
 
 export const protectedRoutes = [
   {
-    path: 'app',
+    path: 'boards',
     element: <App />,
     children: [
       {
         path: '',
-        element: <NoBoards />
+        element: <Boards />
       },
       {
         path: ':board',
