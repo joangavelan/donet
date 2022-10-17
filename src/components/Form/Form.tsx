@@ -17,7 +17,7 @@ type FormProps<TFormValues extends FieldValues> = {
   sx?: SystemStyleObject
 }
 
-export const Form = <TFormValues extends Record<string, unknown>>({
+export const Form = <TFormValues extends FieldValues>({
   children,
   onSubmit,
   schema,
