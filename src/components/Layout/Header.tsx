@@ -15,6 +15,7 @@ import {
 import { useLogout } from '@/features/auth/hooks'
 import { useParams } from 'react-router-dom'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { VscTrash, VscSignOut } from 'react-icons/vsc'
 import { useQueryClient } from 'react-query'
 import type { Board } from '@/types'
 import { Alert } from '../Elements'
@@ -65,12 +66,19 @@ export const Header = () => {
 
         <Menu>
           <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} />
-          <MenuList>
-            <MenuItem isDisabled={!board} onClick={openAlertDialog}>
+          <MenuList sx={{ '.chakra-menu__icon': { fontSize: 'md' } }}>
+            <MenuItem
+              isDisabled={!board}
+              onClick={openAlertDialog}
+              icon={<VscTrash />}
+            >
               Delete Board
             </MenuItem>
             <MenuDivider />
-            <MenuItem onClick={() => logoutMutation.mutate()}>
+            <MenuItem
+              onClick={() => logoutMutation.mutate()}
+              icon={<VscSignOut />}
+            >
               Sign Out
             </MenuItem>
           </MenuList>
