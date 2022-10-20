@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { AppContainer, Header, Main, Sidebar } from '@/components/Layout'
-import { Board } from '@/features/board/components'
 import { Outlet } from 'react-router'
-import { Boards, Welcome } from '@/features/misc/components'
+import { Welcome } from '@/features/misc/components'
 import { useDisclosure } from '@chakra-ui/react'
 import { useQueryClient } from 'react-query'
+import { BoardShowcase, Board } from '@/features/boards/components'
 
 const App = () => {
   const { isOpen, onOpen: openWelcomeModal, onClose } = useDisclosure()
@@ -39,10 +39,10 @@ export const protectedRoutes = [
     children: [
       {
         path: '',
-        element: <Boards />
+        element: <BoardShowcase />
       },
       {
-        path: ':board',
+        path: ':slug',
         element: <Board />
       }
     ]
