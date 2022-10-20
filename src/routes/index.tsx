@@ -1,11 +1,11 @@
+import { useUser } from '@/features/auth/hooks'
 import { Landing } from '@/features/misc/routes'
-import { useQueryClient } from 'react-query'
 import { useRoutes } from 'react-router'
 import { protectedRoutes } from './protected'
 import { publicRoutes } from './public'
 
 export const AppRoutes = () => {
-  const user = useQueryClient().getQueryData(['user'])
+  const user = useUser()
 
   const commonRoutes = [{ path: '/', element: <Landing /> }]
 

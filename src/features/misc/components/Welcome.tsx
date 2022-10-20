@@ -10,14 +10,13 @@ import {
   Text,
   UnorderedList
 } from '@chakra-ui/react'
-import { useQueryClient } from 'react-query'
-import type { User } from '@supabase/supabase-js'
 import * as React from 'react'
+import { useUser } from '@/features/auth/hooks'
 
 const features = [
   'Create your own boards',
   'Add tasks to your different boards',
-  'Create columns to group your tasks.',
+  'Create columns to group your tasks',
   'Add subtasks',
   'Set the priority of your tasks',
   'Mark your tasks and subtasks as you complete them',
@@ -30,8 +29,8 @@ type WelcomeProps = {
 }
 
 export const Welcome = ({ isOpen, onClose }: WelcomeProps) => {
-  const user = useQueryClient().getQueryData(['user']) as User
-  const userFullName = user?.user_metadata.full_name
+  const user = useUser()
+  const userFullName = user.user_metadata.full_name
 
   // this ref will be used as a workaround to prevent autofocus on the first tabable element (continue button) when the modal pops up
   const initialRef = React.useRef(null)
