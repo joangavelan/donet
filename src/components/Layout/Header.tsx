@@ -8,17 +8,37 @@ import {
   IconButton,
   Flex,
   Text,
-  useColorMode,
-  GridItem
+  GridItem,
+  useDisclosure,
+  useColorModeValue
 } from '@chakra-ui/react'
 import { useLogout } from '@/features/auth/hooks'
 import { useParams } from 'react-router-dom'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { useQueryClient } from 'react-query'
+import type { Board } from '@/types'
+import { Alert } from '../Elements'
+import { useDeleteBoard } from '@/features/boards/hooks'
 
 export const Header = () => {
-  const { colorMode } = useColorMode()
-  const { board } = useParams()
+  const {
+    isOpen,
+    onOpen: openAlertDialog,
+    onClose: closeAlertDialog
+  } = useDisclosure()
+  const { slug } = useParams()
+  const boards = useQueryClient().getQueryData(['boards']) as Board[]
+  const board = boards?.find((board) => board.slug === slug)
   const logoutMutation = useLogout()
+  const deleteBoardMutation = useDeleteBoard()
+
+  const handleDeleteBoard = () => {
+    deleteBoardMutation.mutate(board?.id, {
+      onSuccess: () => {
+        closeAlertDialog()
+      }
+    })
+  }
 
   return (
     <GridItem
@@ -29,19 +49,26 @@ export const Header = () => {
       justifyContent='space-between'
       px={7}
       borderBottom='1px'
-      borderColor={colorMode === 'light' ? 'blackAlpha.200' : 'whiteAlpha.200'}
+      borderColor={useColorModeValue('blackAlpha.200', 'whiteAlpha.200')}
     >
-      <Text as='h1' fontSize='2xl' fontWeight='semibold'>
-        {board ?? 'Boards'}
+      <Text
+        as='h1'
+        fontSize='2xl'
+        fontWeight='semibold'
+        textTransform='capitalize'
+      >
+        {board?.name ?? 'Boards'}
       </Text>
 
-      <Flex align='center' gap={3}>
+      <Flex gap={3}>
         {board && <Button colorScheme='orange'>Add New Task</Button>}
 
         <Menu>
           <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} />
           <MenuList>
-            <MenuItem isDisabled={!board}>Delete Board</MenuItem>
+            <MenuItem isDisabled={!board} onClick={openAlertDialog}>
+              Delete Board
+            </MenuItem>
             <MenuDivider />
             <MenuItem onClick={() => logoutMutation.mutate()}>
               Sign Out
@@ -49,6 +76,15 @@ export const Header = () => {
           </MenuList>
         </Menu>
       </Flex>
+
+      <Alert
+        header='Delete board'
+        body='Are you sure you want to delete this board?'
+        isOpen={isOpen}
+        onClose={closeAlertDialog}
+        onConfirm={handleDeleteBoard}
+        loadingAction={deleteBoardMutation.isLoading}
+      />
     </GridItem>
   )
 }
