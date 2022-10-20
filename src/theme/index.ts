@@ -15,7 +15,7 @@ const styles = {
 
 const semanticTokens = {
   colors: {
-    authButtonColor: {
+    redirectLinkColor: {
       default: 'orange.500',
       _dark: 'orange.200'
     }

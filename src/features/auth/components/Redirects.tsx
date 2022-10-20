@@ -16,7 +16,7 @@ export const Redirects = ({ question, toggleLink }: RedirectsProps) => {
       <Text
         as={Link}
         to={toggleLink.href}
-        color='authButtonColor'
+        color='redirectLinkColor'
         fontWeight='semibold'
         _hover={{ textDecoration: 'underline' }}
       >
