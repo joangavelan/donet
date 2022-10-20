@@ -1,33 +1,23 @@
 import {
   useColorMode,
-  Box,
   Text,
   HStack,
   Icon,
   GridItem,
   Button,
   useColorModeValue,
-  Stack
+  useDisclosure
 } from '@chakra-ui/react'
 import { Logo } from '../Logo'
 import { NavLink } from 'react-router-dom'
-import { MdOutlineSpaceDashboard } from 'react-icons/md'
 import { AiOutlinePlusSquare } from 'react-icons/ai'
-import slugify from 'slugify'
 import { BsMoon, BsSun } from 'react-icons/bs'
-
-const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap']
+import { BoardList, CreateBoardForm } from '@/features/boards/components'
+import { Modal } from '../Elements'
 
 export const Sidebar = () => {
   const { colorMode, toggleColorMode } = useColorMode()
-
-  const activeStyles = {
-    background: `linear-gradient(to right, #FD7700, ${
-      colorMode === 'light' ? '#ab8300' : '#FFD302'
-    })`,
-    backgroundClip: 'text',
-    color: 'transparent'
-  }
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <GridItem
@@ -53,33 +43,14 @@ export const Sidebar = () => {
           cursor='pointer'
           _hover={{ color: 'orange.400' }}
           title='new board'
+          onClick={onOpen}
         />
+        <Modal title='New Board' isOpen={isOpen} onClose={onClose}>
+          <CreateBoardForm closeModal={onClose} />
+        </Modal>
       </HStack>
 
-      <Stack as='ul' gap={3} overflowY='scroll'>
-        {boards.map((board, index) => (
-          <Box as='li' key={index} minW={0} maxW='95%'>
-            <NavLink to={slugify(board, { lower: true })}>
-              {({ isActive }) => (
-                <HStack _hover={{ color: '#FF6200' }}>
-                  <Icon
-                    as={MdOutlineSpaceDashboard}
-                    color={isActive ? '#FF6200' : 'currentColor'}
-                  />
-                  <Text
-                    whiteSpace='nowrap'
-                    overflow='hidden'
-                    textOverflow='ellipsis'
-                    sx={isActive ? activeStyles : undefined}
-                  >
-                    {board}
-                  </Text>
-                </HStack>
-              )}
-            </NavLink>
-          </Box>
-        ))}
-      </Stack>
+      <BoardList />
 
       <HStack
         gap={1}
