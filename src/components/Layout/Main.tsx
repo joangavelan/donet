@@ -2,7 +2,7 @@ import { GridItem } from '@chakra-ui/react'
 
 export const Main = ({ children }: { children: React.ReactNode }) => {
   return (
-    <GridItem as='main' area='main' p={7}>
+    <GridItem as='main' area='main' p={7} overflow='hidden'>
       {children}
     </GridItem>
   )
