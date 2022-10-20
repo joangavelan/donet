@@ -1,4 +1,4 @@
-import { Landing } from '@/features/misc'
+import { Landing } from '@/features/misc/routes'
 import { useQueryClient } from 'react-query'
 import { useRoutes } from 'react-router'
 import { protectedRoutes } from './protected'
