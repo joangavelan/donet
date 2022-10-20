@@ -4,7 +4,7 @@ import { Outlet } from 'react-router'
 import { Welcome } from '@/features/misc/components'
 import { useDisclosure } from '@chakra-ui/react'
 import { useQueryClient } from 'react-query'
-import { BoardShowcase, Board } from '@/features/boards/components'
+import { BoardShowcase, Board } from '@/features/boards/routes'
 
 const App = () => {
   const { isOpen, onOpen: openWelcomeModal, onClose } = useDisclosure()

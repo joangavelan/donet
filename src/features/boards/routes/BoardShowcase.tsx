@@ -15,7 +15,7 @@ import {
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { NavLink } from 'react-router-dom'
 import { useBoards } from '../hooks'
-import { CreateBoardForm } from './CreateBoardForm'
+import { CreateBoardForm } from '../components/CreateBoardForm'
 
 export const BoardShowcase = () => {
   const { data: boards, isLoading, isError } = useBoards()
