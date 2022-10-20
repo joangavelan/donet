@@ -1,4 +1,4 @@
-import { useNotification } from '@/hooks/useNotification'
+import { useNotification } from '@/hooks'
 import type { AuthApiError } from '@supabase/supabase-js'
 import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'

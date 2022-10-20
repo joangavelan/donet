@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 import { getBoards } from '../api'
 import type { PostgrestError } from '@supabase/supabase-js'
-import { useNotification } from '@/hooks/useNotification'
+import { useNotification } from '@/hooks'
 
 export const useBoards = () => {
   const showNotification = useNotification()

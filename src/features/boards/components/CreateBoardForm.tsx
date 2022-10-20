@@ -1,5 +1,5 @@
 import { Form, InputField } from '@/components/Form'
-import { useNotification } from '@/hooks/useNotification'
+import { useNotification } from '@/hooks'
 import { Button, HStack } from '@chakra-ui/react'
 import type { User } from '@supabase/supabase-js'
 import { useQueryClient } from 'react-query'

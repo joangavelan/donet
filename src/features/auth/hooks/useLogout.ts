@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from 'react-query'
-import { useNotification } from '@/hooks/useNotification'
+import { useNotification } from '@/hooks'
 import { useNavigate } from 'react-router-dom'
 import { signOut } from '../api/signOut'
 import type { AuthApiError } from '@supabase/supabase-js'

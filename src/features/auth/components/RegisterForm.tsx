@@ -4,7 +4,7 @@ import { Form, InputField } from '@/components/Form'
 import * as z from 'zod'
 import { useMutation, useQueryClient } from 'react-query'
 import type { AuthApiError } from '@supabase/supabase-js'
-import { useNotification } from '@/hooks/useNotification'
+import { useNotification } from '@/hooks'
 import { signUp } from '../api/signUp'
 
 const schema = z.object({

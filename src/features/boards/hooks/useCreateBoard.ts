@@ -1,4 +1,4 @@
-import { useNotification } from '@/hooks/useNotification'
+import { useNotification } from '@/hooks'
 import type { PostgrestError } from '@supabase/supabase-js'
 import { useMutation } from 'react-query'
 import { createBoard } from '../api'

@@ -5,7 +5,7 @@ import * as z from 'zod'
 import { useMutation, useQueryClient } from 'react-query'
 import { signIn } from '../api/signIn'
 import type { AuthApiError } from '@supabase/supabase-js'
-import { useNotification } from '@/hooks/useNotification'
+import { useNotification } from '@/hooks'
 
 const schema = z.object({
   email: z.string().min(1, 'Required').email(),
