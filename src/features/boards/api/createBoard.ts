@@ -4,17 +4,21 @@ import type { Board } from '@/types'
 type NewBoard = Omit<Board, 'id'>
 
 export const createBoard = async (newBoard: NewBoard) => {
-  const { data: board } = await supabase
+  const { data: existingBoard } = await supabase
     .from('boards')
     .select()
     .eq('slug', newBoard.slug)
     .single()
 
-  if (board) throw new Error('The board already exists')
+  if (existingBoard) throw new Error('The board already exists')
 
-  const { data, error } = await supabase.from('boards').insert([newBoard])
+  const { data: createdBoard, error } = await supabase
+    .from('boards')
+    .insert(newBoard)
+    .select()
+    .single()
 
   if (error) throw error
 
-  return data
+  return createdBoard
 }

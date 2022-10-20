@@ -3,6 +3,7 @@ import { useNotification } from '@/hooks/useNotification'
 import { Button, HStack } from '@chakra-ui/react'
 import type { User } from '@supabase/supabase-js'
 import { useQueryClient } from 'react-query'
+import { useNavigate } from 'react-router-dom'
 import slugify from 'slugify'
 import * as z from 'zod'
 import { useCreateBoard } from '../hooks'
@@ -26,6 +27,7 @@ export const CreateBoardForm = ({ closeModal }: CreateBoardFormProps) => {
   const userId = (queryClient.getQueryData(['user']) as User).id
   const createBoardMutation = useCreateBoard()
   const showNotification = useNotification()
+  const navigate = useNavigate()
 
   return (
     <Form<FormValues>
@@ -36,13 +38,14 @@ export const CreateBoardForm = ({ closeModal }: CreateBoardFormProps) => {
         createBoardMutation.mutate(
           { name, slug, user_id: userId },
           {
-            onSuccess: async () => {
+            onSuccess: async (board) => {
               await queryClient.invalidateQueries(['boards'])
               showNotification({
                 type: 'success',
                 message: 'New board created'
               })
               closeModal()
+              navigate(board.slug)
             }
           }
         )
