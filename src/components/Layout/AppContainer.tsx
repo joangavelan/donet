@@ -1,4 +1,5 @@
 import { Grid } from '@chakra-ui/react'
+import { Helmet } from 'react-helmet-async'
 
 export const AppContainer = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -9,6 +10,10 @@ export const AppContainer = ({ children }: { children: React.ReactNode }) => {
       gridTemplateRows={'100px 1fr'}
       h='100vh'
     >
+      <Helmet>
+        <title>Donet</title>
+      </Helmet>
+
       {children}
     </Grid>
   )
