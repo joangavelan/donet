@@ -1,4 +1,5 @@
-import { useToast, UseToastOptions } from '@chakra-ui/react'
+import type { UseToastOptions } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 
 type Notification = {
   type: UseToastOptions['status']

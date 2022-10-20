@@ -29,7 +29,8 @@ module.exports = {
     '@typescript-eslint/strict-boolean-expressions': 'off',
     'no-throw-literal': 'off',
     '@typescript-eslint/no-throw-literal': 'off',
-    'react/no-unescaped-entities': 'off'
+    'react/no-unescaped-entities': 'off',
+    '@typescript-eslint/consistent-type-imports': 'warn'
   },
   ignorePatterns: ['vite.config.ts']
 }

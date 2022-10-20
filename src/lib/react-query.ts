@@ -1,4 +1,5 @@
-import { DefaultOptions, QueryClient } from 'react-query'
+import type { DefaultOptions } from 'react-query'
+import { QueryClient } from 'react-query'
 import { createWebStoragePersistor } from 'react-query/createWebStoragePersistor-experimental'
 import { persistQueryClient } from 'react-query/persistQueryClient-experimental'
 

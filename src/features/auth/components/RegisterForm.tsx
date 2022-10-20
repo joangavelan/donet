@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Form, InputField } from '@/components/Form'
 import * as z from 'zod'
 import { useMutation, useQueryClient } from 'react-query'
-import { AuthApiError } from '@supabase/supabase-js'
+import type { AuthApiError } from '@supabase/supabase-js'
 import { useNotification } from '@/hooks/useNotification'
 import { signUp } from '../api/signUp'
 
