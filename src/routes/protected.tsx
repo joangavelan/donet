@@ -19,16 +19,18 @@ const App = () => {
   }, [])
 
   return (
-    <AppContainer>
-      <Sidebar />
-      <Header />
-      <Main>
-        <Outlet />
-      </Main>
+    <>
+      <AppContainer>
+        <Sidebar />
+        <Header />
+        <Main>
+          <Outlet />
+        </Main>
+      </AppContainer>
 
       {/* welcome modal that pops up for new users */}
       <Welcome isOpen={isOpen} onClose={onClose} />
-    </AppContainer>
+    </>
   )
 }
 
