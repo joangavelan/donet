@@ -6,7 +6,8 @@ export type Json =
   | { [key: string]: Json }
   | Json[]
 
-export type Database = {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+export interface Database {
   public: {
     Tables: {
       boards: {
@@ -18,7 +19,7 @@ export type Database = {
         }
         Insert: {
           id?: number
-          name?: string
+          name: string
           user_id: string
           slug: string
         }
@@ -32,36 +33,50 @@ export type Database = {
       tasks: {
         Row: {
           id: number
-          created_at: string | null
           title: string | null
           description: string | null
-          subtasks: string[] | null
-          column: string | null
-          board_id: number
+          subtasks: Json
           user_id: string
           completed: boolean | null
+          template_id: number
         }
         Insert: {
           id?: number
-          created_at?: string | null
           title?: string | null
           description?: string | null
-          subtasks?: string[] | null
-          column?: string | null
-          board_id: number
+          subtasks: Json
           user_id?: string
           completed?: boolean | null
+          template_id: number
         }
         Update: {
           id?: number
-          created_at?: string | null
           title?: string | null
           description?: string | null
-          subtasks?: string[] | null
-          column?: string | null
-          board_id?: number
+          subtasks?: Json
           user_id?: string
           completed?: boolean | null
+          template_id?: number
+        }
+      }
+      templates: {
+        Row: {
+          id: number
+          name: string
+          user_id: string
+          board_id: number
+        }
+        Insert: {
+          id?: number
+          name: string
+          user_id: string
+          board_id: number
+        }
+        Update: {
+          id?: number
+          name?: string
+          user_id?: string
+          board_id?: number
         }
       }
     }
