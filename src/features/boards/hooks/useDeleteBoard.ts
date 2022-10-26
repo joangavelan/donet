@@ -13,7 +13,7 @@ export const useDeleteBoard = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries(['boards'])
       showNotification({
-        type: 'warning',
+        type: 'success',
         message: 'The board has been deleted'
       })
       navigate('/boards')
