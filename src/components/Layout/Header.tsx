@@ -4,7 +4,6 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  Button,
   IconButton,
   Flex,
   Text,
@@ -17,6 +16,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs'
 import { VscTrash, VscSignOut } from 'react-icons/vsc'
 import { Alert } from '../Elements'
 import { useBoard, useDeleteBoard } from '@/features/boards/hooks'
+import { AddTemplate } from '@/features/templates/components'
 
 export const Header = () => {
   const {
@@ -57,7 +57,7 @@ export const Header = () => {
       </Text>
 
       <Flex gap={3}>
-        {board && <Button colorScheme='orange'>Add New Task</Button>}
+        <AddTemplate />
 
         <Menu>
           <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} />
