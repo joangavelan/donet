@@ -13,13 +13,10 @@ import {
   useColorModeValue
 } from '@chakra-ui/react'
 import { useLogout } from '@/features/auth/hooks'
-import { useParams } from 'react-router-dom'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { VscTrash, VscSignOut } from 'react-icons/vsc'
-import { useQueryClient } from 'react-query'
-import type { Board } from '@/types'
 import { Alert } from '../Elements'
-import { useDeleteBoard } from '@/features/boards/hooks'
+import { useBoard, useDeleteBoard } from '@/features/boards/hooks'
 
 export const Header = () => {
   const {
@@ -27,9 +24,7 @@ export const Header = () => {
     onOpen: openAlertDialog,
     onClose: closeAlertDialog
   } = useDisclosure()
-  const { slug } = useParams()
-  const boards = useQueryClient().getQueryData(['boards']) as Board[]
-  const board = boards?.find((board) => board.slug === slug)
+  const board = useBoard()
   const logoutMutation = useLogout()
   const deleteBoardMutation = useDeleteBoard()
 
