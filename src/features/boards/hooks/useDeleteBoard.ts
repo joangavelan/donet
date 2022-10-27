@@ -1,5 +1,5 @@
 import { useNotification } from '@/hooks'
-import type { AuthApiError } from '@supabase/supabase-js'
+import type { PostgrestError } from '@supabase/supabase-js'
 import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { deleteBoard } from '../api'
@@ -19,7 +19,7 @@ export const useDeleteBoard = () => {
       navigate('/boards')
     },
     onError: (error) => {
-      const { message } = error as AuthApiError
+      const { message } = error as PostgrestError
       showNotification({ type: 'error', message })
     }
   })
