@@ -15,12 +15,11 @@ import { useUser } from '@/features/auth/hooks'
 
 const features = [
   'Create your own boards',
-  'Add tasks to your different boards',
-  'Create columns to group your tasks',
-  'Add subtasks',
-  'Set the priority of your tasks',
-  'Mark your tasks and subtasks as you complete them',
-  'Drag and drop your tasks between columns'
+  'Add templates to group your tasks',
+  'Add tasks to your different templates',
+  'Add subtasks within your tasks',
+  'Check off your subtasks as you complete them',
+  'Drag and drop your tasks between templates'
 ]
 
 type WelcomeProps = {
