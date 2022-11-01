@@ -33,29 +33,26 @@ export interface Database {
       tasks: {
         Row: {
           id: number
-          title: string | null
-          description: string | null
+          title: string
+          description: string
           subtasks: Json
           user_id: string
-          completed: boolean | null
           template_id: number
         }
         Insert: {
           id?: number
-          title?: string | null
-          description?: string | null
+          title: string
+          description: string
           subtasks: Json
-          user_id?: string
-          completed?: boolean | null
+          user_id: string
           template_id: number
         }
         Update: {
           id?: number
-          title?: string | null
-          description?: string | null
+          title?: string
+          description?: string
           subtasks?: Json
           user_id?: string
-          completed?: boolean | null
           template_id?: number
         }
       }
