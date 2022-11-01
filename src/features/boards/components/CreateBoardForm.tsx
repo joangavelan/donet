@@ -1,8 +1,7 @@
 import { Form, InputField } from '@/components/Form'
+import { useUser } from '@/features/auth/hooks'
 import { useNotification } from '@/hooks'
 import { Button, HStack } from '@chakra-ui/react'
-import type { User } from '@supabase/supabase-js'
-import { useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import slugify from 'slugify'
 import * as z from 'zod'
@@ -13,7 +12,8 @@ const schema = z.object({
     .string()
     .trim()
     .min(1, 'Required')
-    .regex(/^[a-zA-Z0-9 ]*$/, 'Only letters and numbers are allowed')
+    .max(30, 'Max length is 30 characters')
+    .regex(/^[a-zA-Z0-9 ]*$/, 'Only letters and numbers')
 })
 
 type FormValues = z.infer<typeof schema>
@@ -23,9 +23,8 @@ type CreateBoardFormProps = {
 }
 
 export const CreateBoardForm = ({ closeModal }: CreateBoardFormProps) => {
-  const queryClient = useQueryClient()
-  const userId = (queryClient.getQueryData(['user']) as User).id
-  const createBoardMutation = useCreateBoard()
+  const user = useUser()
+  const createBoard = useCreateBoard()
   const showNotification = useNotification()
   const navigate = useNavigate()
 
@@ -35,11 +34,10 @@ export const CreateBoardForm = ({ closeModal }: CreateBoardFormProps) => {
       onSubmit={({ name }) => {
         const slug = slugify(name, { lower: true })
 
-        createBoardMutation.mutate(
-          { name, slug, user_id: userId },
+        createBoard.mutate(
+          { name, slug, user_id: user.id },
           {
             onSuccess: async (board) => {
-              await queryClient.invalidateQueries(['boards'])
               showNotification({
                 type: 'success',
                 message: 'New board created'
@@ -62,7 +60,7 @@ export const CreateBoardForm = ({ closeModal }: CreateBoardFormProps) => {
           />
           <Button
             type='submit'
-            isLoading={createBoardMutation.isLoading}
+            isLoading={createBoard.isLoading}
             colorScheme='orange'
             px={7}
           >

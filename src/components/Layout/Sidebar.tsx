@@ -2,22 +2,17 @@ import {
   useColorMode,
   Text,
   HStack,
-  Icon,
   GridItem,
   Button,
-  useColorModeValue,
-  useDisclosure
+  useColorModeValue
 } from '@chakra-ui/react'
 import { Logo } from '../Logo'
 import { NavLink } from 'react-router-dom'
-import { AiOutlinePlusSquare } from 'react-icons/ai'
 import { BsMoon, BsSun } from 'react-icons/bs'
-import { BoardList, CreateBoardForm } from '@/features/boards/components'
-import { Modal } from '../Elements'
+import { BoardList, CreateBoard } from '@/features/boards/components'
 
 export const Sidebar = () => {
-  const { colorMode, toggleColorMode } = useColorMode()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { toggleColorMode } = useColorMode()
 
   return (
     <GridItem
@@ -26,28 +21,18 @@ export const Sidebar = () => {
       area='aside'
       gridTemplateRows={'100px auto 1fr auto'}
       borderRight='1px'
-      borderColor={colorMode === 'light' ? 'blackAlpha.200' : 'whiteAlpha.200'}
+      borderColor={useColorModeValue('blackAlpha.200', 'whiteAlpha.200')}
       gap={7}
       px={7}
     >
       <Logo />
 
-      <HStack justifyContent='space-between'>
+      <HStack>
         <Text as='h2' fontWeight='semibold' _hover={{ color: 'orange.400' }}>
           <NavLink to='/boards'>BOARDS</NavLink>
         </Text>
-        <Icon
-          as={AiOutlinePlusSquare}
-          color={colorMode === 'light' ? 'blackAlpha.800' : 'whiteAlpha.800'}
-          boxSize='1.3rem'
-          cursor='pointer'
-          _hover={{ color: 'orange.400' }}
-          title='new board'
-          onClick={onOpen}
-        />
-        <Modal title='New Board' isOpen={isOpen} onClose={onClose}>
-          <CreateBoardForm closeModal={onClose} />
-        </Modal>
+
+        <CreateBoard />
       </HStack>
 
       <BoardList />
