@@ -17,11 +17,11 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
-type AddTemplateProps = {
+type AddTemplateFormProps = {
   closeModal: () => void
 }
 
-export const AddTemplateForm = ({ closeModal }: AddTemplateProps) => {
+export const AddTemplateForm = ({ closeModal }: AddTemplateFormProps) => {
   const createTemplate = useCreateTemplate()
   const board = useBoard()
   const user = useUser()

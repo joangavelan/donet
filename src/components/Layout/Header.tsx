@@ -16,7 +16,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs'
 import { VscTrash, VscSignOut } from 'react-icons/vsc'
 import { Alert } from '../Elements'
 import { useBoard, useDeleteBoard } from '@/features/boards/hooks'
-import { AddTemplate } from '@/features/templates/components'
+import { CreateTask } from '@/features/tasks/components'
 
 export const Header = () => {
   const {
@@ -57,7 +57,7 @@ export const Header = () => {
       </Text>
 
       <Flex gap={3}>
-        <AddTemplate />
+        {board && <CreateTask />}
 
         <Menu>
           <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} />

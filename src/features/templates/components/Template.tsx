@@ -1,7 +1,7 @@
 import { Alert } from '@/components/Elements'
 import type { Template as TTemplate } from '@/types'
 import {
-  Box,
+  GridItem,
   HStack,
   Icon,
   Text,
@@ -28,15 +28,12 @@ export const Template = ({ id, name }: TTemplate) => {
   }
 
   return (
-    <Box
+    <GridItem
       as='li'
-      key={id}
-      bg={useColorModeValue('orange.50', '#1f2431')}
-      minH='200px'
-      w='300px'
-      borderRadius='lg'
-      flexShrink={0}
+      height='max-content'
       p={5}
+      overflow='scroll'
+      bg={useColorModeValue('orange.50', '#1f2431')}
     >
       <HStack align='center' justify='space-between'>
         <Text
@@ -65,6 +62,6 @@ export const Template = ({ id, name }: TTemplate) => {
           />
         </>
       </HStack>
-    </Box>
+    </GridItem>
   )
 }
