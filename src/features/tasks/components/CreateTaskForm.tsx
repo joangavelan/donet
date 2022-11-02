@@ -40,7 +40,7 @@ const schema = z.object({
       completed: z.boolean()
     })
     .array(),
-  template: z.string()
+  template_id: z.number()
 })
 
 type FormValues = z.infer<typeof schema>
@@ -118,8 +118,8 @@ export const CreateTaskForm = ({
           <SelectField
             id='template'
             label='Template'
-            registration={register('template')}
-            error={formState.errors.template}
+            registration={register('template_id', { valueAsNumber: true })}
+            error={formState.errors.template_id}
             options={templates.map(({ id, name }) => ({
               label: toTitleCase(name),
               value: id
