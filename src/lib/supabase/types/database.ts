@@ -35,7 +35,7 @@ export interface Database {
           id: number
           title: string
           description: string
-          subtasks: Json
+          subtasks: string
           user_id: string
           template_id: number
         }
@@ -43,7 +43,7 @@ export interface Database {
           id?: number
           title: string
           description: string
-          subtasks: Json
+          subtasks: string
           user_id: string
           template_id: number
         }
@@ -51,7 +51,7 @@ export interface Database {
           id?: number
           title?: string
           description?: string
-          subtasks?: Json
+          subtasks?: string
           user_id?: string
           template_id?: number
         }

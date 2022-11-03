@@ -1,5 +1,5 @@
 import { Alert } from '@/components/Elements'
-import type { Template as TTemplate } from '@/types'
+import type { Templates } from '@/types'
 import {
   GridItem,
   HStack,
@@ -11,7 +11,7 @@ import {
 import { BiArchiveIn } from 'react-icons/bi'
 import { useArchiveTemplate } from '../hooks'
 
-export const Template = ({ id, name }: TTemplate) => {
+export const Template = ({ id, name }: Templates['Row']) => {
   const {
     isOpen,
     onClose: closeAlertDialog,

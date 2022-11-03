@@ -1,6 +1,8 @@
-import type { Board } from '@/types'
+import type { Boards } from '@/types'
 import { useQueryClient } from 'react-query'
 import { useParams } from 'react-router-dom'
+
+type Board = Boards['Row']
 
 export const useBoard = () => {
   const { slug } = useParams()

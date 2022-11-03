@@ -1,9 +1,7 @@
 import { supabase } from '@/lib/supabase'
-import type { Board } from '@/types'
+import type { Boards } from '@/types'
 
-type NewBoard = Omit<Board, 'id'>
-
-export const createBoard = async (newBoard: NewBoard) => {
+export const createBoard = async (newBoard: Boards['Insert']) => {
   const { data: existingBoard } = await supabase
     .from('boards')
     .select()

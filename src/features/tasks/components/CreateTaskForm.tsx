@@ -14,7 +14,7 @@ import {
   FormControl
 } from '@chakra-ui/react'
 import * as z from 'zod'
-import type { Template } from '@/types'
+import type { Templates } from '@/types'
 import { toTitleCase } from '@/utils'
 import { IoMdClose } from 'react-icons/io'
 import { getSubtaskPlaceholder } from '../utils'
@@ -51,7 +51,7 @@ const schema = z.object({
 export type FormValues = z.infer<typeof schema>
 
 type CreateTaskFormProps = {
-  templates: Template[]
+  templates: Array<Templates['Row']>
   closeModal: () => void
 }
 

@@ -1,9 +1,7 @@
 import { supabase } from '@/lib/supabase'
-import type { Template } from '@/types'
+import type { Templates } from '@/types'
 
-type newTemplate = Omit<Template, 'id'>
-
-export const createTemplate = async (newTemplate: newTemplate) => {
+export const createTemplate = async (newTemplate: Templates['Insert']) => {
   const { data: createdTemplate, error } = await supabase
     .from('templates')
     .insert(newTemplate)
