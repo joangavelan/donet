@@ -33,8 +33,7 @@ export const Templates = () => {
       gap={4}
       gridAutoFlow='column'
       gridAutoColumns='330px'
-      overflowX='scroll'
-      overflowY='hidden'
+      overflow='scroll'
       sx={{
         '& div': {
           borderRadius: 'xl'

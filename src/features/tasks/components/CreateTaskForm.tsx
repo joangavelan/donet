@@ -59,11 +59,30 @@ export const CreateTaskForm = ({
   templates,
   closeModal
 }: CreateTaskFormProps) => {
+  const createTask = useCreateTask()
+  const showNotification = useNotification()
+  const user = useUser()
+
   return (
     <Form<FormValues>
       schema={schema}
-      onSubmit={(values) => {
-        console.log(values)
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      onSubmit={({ title, description, template_id, subtasks }) => {
+        createTask.mutate(
+          {
+            title,
+            description,
+            template_id,
+            subtasks: JSON.stringify(subtasks),
+            user_id: user.id
+          },
+          {
+            onSuccess: () => {
+              showNotification({ type: 'success', message: 'New task created' })
+              closeModal()
+            }
+          }
+        )
       }}
     >
       {({ register, formState, control }) => (
@@ -132,7 +151,11 @@ export const CreateTaskForm = ({
               value: id
             }))}
           />
-          <Button colorScheme='orange' type='submit'>
+          <Button
+            colorScheme='orange'
+            type='submit'
+            isLoading={createTask.isLoading}
+          >
             Create Task
           </Button>
         </Stack>

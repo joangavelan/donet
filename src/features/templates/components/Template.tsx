@@ -1,9 +1,12 @@
 import { Alert } from '@/components/Elements'
+import { Task } from '@/features/tasks/components'
+import { useTasks } from '@/features/tasks/hooks'
 import type { Templates } from '@/types'
 import {
   GridItem,
   HStack,
   Icon,
+  Stack,
   Text,
   useColorModeValue,
   useDisclosure
@@ -18,6 +21,7 @@ export const Template = ({ id, name }: Templates['Row']) => {
     onOpen: openAlertDialog
   } = useDisclosure()
   const archiveTemplate = useArchiveTemplate()
+  const { data: tasks } = useTasks(id)
 
   const handleArchiveTemplate = () => {
     archiveTemplate.mutate(id, {
@@ -30,9 +34,11 @@ export const Template = ({ id, name }: Templates['Row']) => {
   return (
     <GridItem
       as='li'
+      display='flex'
+      flexDirection='column'
       height='max-content'
+      gap={5}
       p={5}
-      overflow='scroll'
       bg={useColorModeValue('orange.50', '#1f2431')}
     >
       <HStack align='center' justify='space-between'>
@@ -41,7 +47,7 @@ export const Template = ({ id, name }: Templates['Row']) => {
           fontWeight='semibold'
           color={useColorModeValue('#343945', 'gray.400')}
         >
-          {name} (0)
+          {name} ({tasks?.length ?? 0})
         </Text>
         <>
           <Icon
@@ -62,6 +68,14 @@ export const Template = ({ id, name }: Templates['Row']) => {
           />
         </>
       </HStack>
+
+      {!!tasks?.length && (
+        <Stack gap={5}>
+          {tasks.map((task) => (
+            <Task key={task.id} {...task} />
+          ))}
+        </Stack>
+      )}
     </GridItem>
   )
 }
