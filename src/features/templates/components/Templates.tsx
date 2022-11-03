@@ -20,7 +20,7 @@ export const Templates = () => {
     return (
       <Container>
         <Text color='red' fontSize='xl' fontWeight='semibold'>
-          Couldn't fetch the templates
+          Whoops! An error occurred!
         </Text>
       </Container>
     )
