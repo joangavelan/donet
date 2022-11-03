@@ -18,32 +18,37 @@ import type { Template } from '@/types'
 import { toTitleCase } from '@/utils'
 import { IoMdClose } from 'react-icons/io'
 import { getSubtaskPlaceholder } from '../utils'
+import { useCreateTask } from '../hooks'
+import { useNotification } from '@/hooks'
+import { useUser } from '@/features/auth/hooks'
+import { nanoid } from 'nanoid'
 
 const schema = z.object({
   title: z
     .string()
     .trim()
     .min(1, 'Required')
-    .max(25, 'Max length is 25 characters'),
+    .max(100, 'Max length is 100 characters'),
   description: z
     .string()
     .trim()
     .min(1, 'Required')
-    .max(300, 'Max length is 300 characters'),
+    .max(200, 'Max length is 200 characters'),
   subtasks: z
     .object({
+      id: z.string(),
       name: z
         .string()
         .trim()
         .min(1, 'Required')
         .max(50, 'Max length is 50 characters'),
-      completed: z.boolean()
+      isCompleted: z.boolean()
     })
     .array(),
   template_id: z.number()
 })
 
-type FormValues = z.infer<typeof schema>
+export type FormValues = z.infer<typeof schema>
 
 type CreateTaskFormProps = {
   templates: Template[]
@@ -108,7 +113,9 @@ export const CreateTaskForm = ({
                 <Button
                   colorScheme='orange'
                   variant='outline'
-                  onClick={() => append({ name: '', completed: false })}
+                  onClick={() =>
+                    append({ id: nanoid(), name: '', isCompleted: false })
+                  }
                 >
                   + Add New Subtask
                 </Button>
