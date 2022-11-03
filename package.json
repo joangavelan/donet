@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --fix --max-warnings 0 --ext .js,.ts,.tsx ./src --ignore-path .gitignore",
+    "lint": "eslint --fix --ext .js,.ts,.tsx ./src --ignore-path .gitignore",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|css|json|ts|tsx)\"",
     "format": "yarn run prettier --write",
     "postinstall": "husky install"
