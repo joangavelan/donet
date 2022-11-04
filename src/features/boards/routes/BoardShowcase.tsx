@@ -2,25 +2,18 @@ import { Modal } from '@/components/Elements'
 import {
   Button,
   Grid,
-  GridItem,
-  HStack,
-  Icon,
   Spinner,
-  Stack,
   Text,
-  useColorMode,
   useDisclosure,
   VStack
 } from '@chakra-ui/react'
-import { AiOutlineArrowRight } from 'react-icons/ai'
-import { NavLink } from 'react-router-dom'
+
 import { useBoards } from '../hooks'
-import { CreateBoardForm } from '../components/CreateBoardForm'
+import { BoardItem, CreateBoardForm } from '../components'
 
 export const BoardShowcase = () => {
   const { data: boards, isLoading, isError } = useBoards()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { colorMode } = useColorMode()
 
   if (isLoading) {
     return (
@@ -67,35 +60,8 @@ export const BoardShowcase = () => {
       h='100%'
       overflow='scroll'
     >
-      {boards.map(({ id, name, slug }) => (
-        <GridItem
-          as='li'
-          key={id}
-          textTransform='capitalize'
-          borderRadius='lg'
-          color='#1A202C'
-          bg={colorMode === 'light' ? '#FFF1B8' : '#d1aa61'}
-          minH={0}
-          minW={0}
-          shadow='sm'
-          _hover={{
-            '.chakra-icon': {
-              transform: 'translateX(5px)'
-            }
-          }}
-        >
-          <Stack as={NavLink} to={slug} p={5}>
-            <HStack>
-              <Text fontWeight='semibold'>{name}</Text>
-              <Icon
-                as={AiOutlineArrowRight}
-                transition='ease-in-out'
-                transitionDuration='200ms'
-              />
-            </HStack>
-            <Text mt={2}>0 tasks</Text>
-          </Stack>
-        </GridItem>
+      {boards.map((board) => (
+        <BoardItem key={board.id} {...board} />
       ))}
     </Grid>
   )
