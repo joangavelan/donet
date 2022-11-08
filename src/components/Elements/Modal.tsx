@@ -5,6 +5,7 @@ import {
   ModalHeader,
   ModalOverlay
 } from '@chakra-ui/react'
+import type { SystemStyleObject } from '@chakra-ui/react'
 
 type ModalProps = {
   title?: string
@@ -12,6 +13,7 @@ type ModalProps = {
   isOpen: boolean
   onClose: () => void
   topPosition?: string | number
+  sx?: SystemStyleObject
 }
 
 export const Modal = ({
@@ -19,12 +21,13 @@ export const Modal = ({
   isOpen,
   onClose,
   children,
-  topPosition = '20%'
+  topPosition = '20%',
+  sx
 }: ModalProps) => {
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size='lg'>
       <ModalOverlay />
-      <ModalContent top={topPosition} pb={4} pt={title ? 0 : 4}>
+      <ModalContent top={topPosition} pb={4} pt={title ? 0 : 4} sx={sx}>
         {title && <ModalHeader>{title}</ModalHeader>}
         <ModalBody>{children}</ModalBody>
       </ModalContent>
