@@ -51,10 +51,10 @@
   },
   "lint-staged": {
     "src/**/*.{css,js,ts,tsx,json}": [
-      "yarn format"
+      "yarn prettier"
     ],
     "src/**/*.{js,ts,tsx}": [
-      "yarn lint"
+      "yarn eslint"
     ]
   }
 }
