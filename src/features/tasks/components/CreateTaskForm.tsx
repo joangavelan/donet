@@ -110,24 +110,26 @@ export const CreateTaskForm = ({
           >
             {({ fields, append, remove }) => (
               <Stack>
-                {fields.map((field, index) => (
-                  <HStack key={field.id}>
-                    <FormControl isInvalid={!!formState.errors.subtasks}>
-                      <Input
-                        {...register(`subtasks.${index}.name`)}
-                        placeholder={getSubtaskPlaceholder(index)}
+                <Stack maxH='8.5rem' overflow='scroll'>
+                  {fields.map((field, index) => (
+                    <HStack key={field.id}>
+                      <FormControl isInvalid={!!formState.errors.subtasks}>
+                        <Input
+                          {...register(`subtasks.${index}.name`)}
+                          placeholder={getSubtaskPlaceholder(index)}
+                        />
+                      </FormControl>
+                      <Icon
+                        as={IoMdClose}
+                        color='#A1ADC0'
+                        boxSize={7}
+                        cursor='pointer'
+                        _hover={{ color: 'orange.500' }}
+                        onClick={() => remove(index)}
                       />
-                    </FormControl>
-                    <Icon
-                      as={IoMdClose}
-                      color='#A1ADC0'
-                      boxSize={7}
-                      cursor='pointer'
-                      _hover={{ color: 'orange.500' }}
-                      onClick={() => remove(index)}
-                    />
-                  </HStack>
-                ))}
+                    </HStack>
+                  ))}
+                </Stack>
 
                 <Button
                   colorScheme='orange'
