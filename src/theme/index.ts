@@ -9,6 +9,10 @@ const styles = {
   global: {
     ul: {
       listStyle: 'none'
+    },
+    '*:focus-visible, *[data-focus], *[aria-invalid=true]': {
+      boxShadow: 'none !important',
+      borderColor: 'inherit !important'
     }
   }
 }
