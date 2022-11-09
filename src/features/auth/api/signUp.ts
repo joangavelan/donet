@@ -15,6 +15,8 @@ export const signUp = async ({ fullName, email, password }: NewUserData) => {
     password,
     options: { data: { full_name: fullName } }
   })
+
   if (error) throw error
+
   return user
 }

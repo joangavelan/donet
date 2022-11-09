@@ -1,3 +1,3 @@
 export * from './useArchiveTemplate'
-export * from './useCreateTemplate'
+export * from './useAddTemplate'
 export * from './useTemplates'

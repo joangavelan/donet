@@ -37,20 +37,20 @@ export const CreateBoardForm = ({ closeModal }: CreateBoardFormProps) => {
         createBoard.mutate(
           { name, slug, user_id: user.id },
           {
-            onSuccess: async (board) => {
+            onSuccess: (newBoard) => {
               showNotification({
                 type: 'success',
                 message: 'New board created'
               })
               closeModal()
-              navigate(board.slug)
+              navigate(newBoard.slug)
             }
           }
         )
       }}
     >
       {({ register, formState }) => (
-        <HStack gap={2} alignItems='start'>
+        <HStack align='start' gap={2}>
           <InputField
             id='name'
             placeholder='e.g: Platform Launch'
@@ -60,8 +60,8 @@ export const CreateBoardForm = ({ closeModal }: CreateBoardFormProps) => {
           />
           <Button
             type='submit'
-            isLoading={createBoard.isLoading}
             colorScheme='orange'
+            isLoading={createBoard.isLoading}
             px={7}
           >
             Create Board

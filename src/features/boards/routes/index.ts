@@ -1,2 +1,2 @@
 export * from './Board'
-export * from './BoardShowcase'
+export * from './Boards'

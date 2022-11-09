@@ -11,7 +11,7 @@ import {
 import { useBoards } from '../hooks'
 import { BoardItem, CreateBoardForm } from '../components'
 
-export const BoardShowcase = () => {
+export const Boards = () => {
   const { data: boards, isLoading, isError } = useBoards()
   const { isOpen, onOpen, onClose } = useDisclosure()
 

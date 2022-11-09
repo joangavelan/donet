@@ -72,7 +72,7 @@ export const Template = ({ id, name }: Templates['Row']) => {
       {!!tasks?.length && (
         <Stack gap={5}>
           {tasks.map((task) => (
-            <Task key={task.id} {...task} />
+            <Task key={task.id} task={task} />
           ))}
         </Stack>
       )}

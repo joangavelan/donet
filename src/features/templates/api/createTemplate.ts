@@ -7,6 +7,8 @@ export const createTemplate = async (newTemplate: Templates['Insert']) => {
     .insert(newTemplate)
     .select()
     .single()
+
   if (error) throw error
+
   return createdTemplate
 }

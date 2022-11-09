@@ -12,8 +12,12 @@ import {
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { getProgressBarColorScheme } from '../utils'
 
-export const Task = ({ id, title, description, subtasks }: Tasks['Row']) => {
-  const totalSubtasks = JSON.parse(subtasks) as Subtasks
+type TaskProps = {
+  task: Tasks['Row']
+}
+
+export const Task = ({ task }: TaskProps) => {
+  const totalSubtasks = JSON.parse(task.subtasks) as Subtasks
   const completedSubtasks = totalSubtasks.filter(
     (subtask) => subtask.isCompleted
   )
@@ -24,7 +28,7 @@ export const Task = ({ id, title, description, subtasks }: Tasks['Row']) => {
 
   return (
     <Stack
-      key={id}
+      key={task.id}
       p={5}
       bg={useColorModeValue('#f9f9f9', '#242b38')}
       shadow='md'
@@ -42,20 +46,23 @@ export const Task = ({ id, title, description, subtasks }: Tasks['Row']) => {
           whiteSpace='nowrap'
           textOverflow='ellipsis'
           overflow='hidden'
+          w='max-content'
         >
-          {title}
+          {task.title}
         </Text>
 
-        <Text
-          fontWeight='medium'
-          fontSize='sm'
-          color={useColorModeValue('blackAlpha.800', 'whiteAlpha.700')}
-          textOverflow='ellipsis'
-          whiteSpace='nowrap'
-          overflow='hidden'
-        >
-          {description}
-        </Text>
+        {task.description && (
+          <Text
+            fontWeight='medium'
+            fontSize='sm'
+            color={useColorModeValue('blackAlpha.800', 'whiteAlpha.700')}
+            textOverflow='ellipsis'
+            whiteSpace='nowrap'
+            overflow='hidden'
+          >
+            {task.description}
+          </Text>
+        )}
       </Stack>
 
       {/* progress */}

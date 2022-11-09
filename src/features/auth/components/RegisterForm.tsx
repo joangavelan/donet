@@ -2,19 +2,23 @@ import { Button, Stack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { Form, InputField } from '@/components/Form'
 import * as z from 'zod'
-import { useMutation, useQueryClient } from 'react-query'
-import type { AuthApiError } from '@supabase/supabase-js'
-import { useNotification } from '@/hooks'
-import { signUp } from '../api/signUp'
+import { useQueryClient } from 'react-query'
+import { useSignUp } from '../hooks'
 
 const schema = z.object({
-  fullName: z.string().trim().min(1, 'Required'),
+  fullName: z
+    .string()
+    .trim()
+    .min(1, 'Required')
+    .min(3, 'Full name must have at least 3 characters')
+    .max(60, 'Max full name length is 60 characters'),
   email: z.string().min(1, 'Required').email(),
   password: z
     .string()
     .trim()
     .min(1, 'Required')
     .min(6, 'Password must be at least 6 characters')
+    .max(30, 'Max password length is 30 characters')
 })
 
 type FormValues = z.infer<typeof schema>
@@ -22,24 +26,19 @@ type FormValues = z.infer<typeof schema>
 export const RegisterForm = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const registerMutation = useMutation(signUp)
-  const showNotification = useNotification()
+  const signUp = useSignUp()
 
   return (
     <Stack gap={4}>
       <Form<FormValues>
         schema={schema}
-        onSubmit={async ({ fullName, email, password }) => {
-          await registerMutation.mutateAsync(
+        onSubmit={({ fullName, email, password }) => {
+          signUp.mutate(
             { fullName, email, password },
             {
-              onError: (error) => {
-                const { message } = error as AuthApiError
-                showNotification({ type: 'error', message })
-              },
               onSuccess: (user) => {
                 queryClient.setQueryData(['user'], user)
-                queryClient.setQueryData(['new-user'], true)
+                queryClient.setQueryData(['isNewUser'], true)
                 navigate('/boards')
               }
             }
@@ -72,7 +71,7 @@ export const RegisterForm = () => {
             <Button
               type='submit'
               colorScheme='orange'
-              isLoading={formState.isSubmitting}
+              isLoading={signUp.isLoading}
             >
               Sign Up
             </Button>

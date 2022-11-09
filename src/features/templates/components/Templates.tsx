@@ -2,7 +2,7 @@ import { useBoard } from '@/features/boards/hooks'
 import { Grid, Spinner, Text } from '@chakra-ui/react'
 import { useTemplates } from '../hooks'
 import { Template } from './Template'
-import { AddTemplate } from './AddTemplate'
+import { AddTemplateColumn } from './AddTemplateColumn'
 
 export const Templates = () => {
   const board = useBoard()
@@ -44,7 +44,7 @@ export const Templates = () => {
         <Template key={template.id} {...template} />
       ))}
 
-      <AddTemplate />
+      <AddTemplateColumn />
     </Grid>
   )
 }

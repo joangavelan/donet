@@ -5,6 +5,8 @@ export const getTasks = async (templateId: number) => {
     .from('tasks')
     .select()
     .eq('template_id', templateId)
+
   if (error) throw error
+
   return tasks
 }

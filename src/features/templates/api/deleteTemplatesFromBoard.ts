@@ -5,5 +5,6 @@ export const deleteTemplatesFromBoard = async (boardId: number) => {
     .from('templates')
     .delete()
     .eq('board_id', boardId)
+
   if (error) throw error
 }

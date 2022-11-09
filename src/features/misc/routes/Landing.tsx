@@ -1,3 +1,4 @@
+import { useUser } from '@/features/auth/hooks'
 import {
   Flex,
   Box,
@@ -10,12 +11,11 @@ import {
 } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 import { AiOutlineHome, AiOutlineGithub } from 'react-icons/ai'
-import { useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router'
 
 export const Landing = () => {
+  const user = useUser()
   const navigate = useNavigate()
-  const user = useQueryClient().getQueryData('user')
 
   const handleStart = () => {
     if (user) {

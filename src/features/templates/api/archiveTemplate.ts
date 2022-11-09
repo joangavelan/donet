@@ -7,6 +7,8 @@ export const archiveTemplate = async (templateId: number) => {
     .eq('id', templateId)
     .select()
     .single()
+
   if (error) throw error
+
   return archivedTemplate
 }

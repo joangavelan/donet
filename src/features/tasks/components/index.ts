@@ -1,3 +1,3 @@
-export * from './CreateTask'
+export * from './CreateTaskButton'
 export * from './CreateTaskForm'
 export * from './Task'

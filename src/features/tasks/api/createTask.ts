@@ -7,6 +7,8 @@ export const createTask = async (newTask: Tasks['Insert']) => {
     .insert(newTask)
     .select()
     .single()
+
   if (error) throw error
+
   return createdTask
 }

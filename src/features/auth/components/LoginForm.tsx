@@ -2,10 +2,8 @@ import { Button, Stack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { Form, InputField } from '@/components/Form'
 import * as z from 'zod'
-import { useMutation, useQueryClient } from 'react-query'
-import { signIn } from '../api/signIn'
-import type { AuthApiError } from '@supabase/supabase-js'
-import { useNotification } from '@/hooks'
+import { useQueryClient } from 'react-query'
+import { useSignIn } from '../hooks'
 
 const schema = z.object({
   email: z.string().min(1, 'Required').email(),
@@ -14,6 +12,7 @@ const schema = z.object({
     .trim()
     .min(1, 'Required')
     .min(6, 'Password must be at least 6 characters')
+    .max(30, 'Max password length is 30 characters')
 })
 
 type FormValues = z.infer<typeof schema>
@@ -21,21 +20,16 @@ type FormValues = z.infer<typeof schema>
 export const LoginForm = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const loginMutation = useMutation(signIn)
-  const showNotification = useNotification()
+  const signIn = useSignIn()
 
   return (
     <Stack gap={4}>
       <Form<FormValues>
         schema={schema}
-        onSubmit={async ({ email, password }) => {
-          await loginMutation.mutateAsync(
+        onSubmit={({ email, password }) => {
+          signIn.mutate(
             { email, password },
             {
-              onError: (error) => {
-                const { message } = error as AuthApiError
-                showNotification({ type: 'error', message })
-              },
               onSuccess: (user) => {
                 queryClient.setQueryData(['user'], user)
                 navigate('/boards')
@@ -63,7 +57,7 @@ export const LoginForm = () => {
             <Button
               type='submit'
               colorScheme='orange'
-              isLoading={formState.isSubmitting}
+              isLoading={signIn.isLoading}
             >
               Sign In
             </Button>

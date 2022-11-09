@@ -11,7 +11,7 @@ import { AddTemplateForm } from './AddTemplateForm'
 import * as React from 'react'
 import { TiPlus } from 'react-icons/ti'
 
-export const AddTemplate = () => {
+export const AddTemplateColumn = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (

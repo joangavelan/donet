@@ -6,7 +6,7 @@ import { useTemplates } from '@/features/templates/hooks'
 import { useBoard } from '@/features/boards/hooks'
 import { useNotification } from '@/hooks'
 
-export const CreateTask = () => {
+export const CreateTaskButton = () => {
   const { isOpen, onClose, onOpen: openCreateTaskForm } = useDisclosure()
   const board = useBoard()
   const { data: templates } = useTemplates(board.id)

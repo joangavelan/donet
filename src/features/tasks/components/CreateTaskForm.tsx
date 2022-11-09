@@ -3,25 +3,19 @@ import {
   InputField,
   SelectField,
   TextareaField,
-  DynamicInputFields
+  DynamicInputFields,
+  DynamicInputField
 } from '@/components/Form'
-import {
-  Stack,
-  Button,
-  Input,
-  HStack,
-  Icon,
-  FormControl
-} from '@chakra-ui/react'
+import { Stack, Button } from '@chakra-ui/react'
 import * as z from 'zod'
 import type { Templates } from '@/types'
 import { toTitleCase } from '@/utils'
-import { IoMdClose } from 'react-icons/io'
 import { getSubtaskPlaceholder } from '../utils'
 import { useCreateTask } from '../hooks'
 import { useNotification } from '@/hooks'
 import { useUser } from '@/features/auth/hooks'
 import { nanoid } from 'nanoid'
+import type { FieldError } from 'react-hook-form'
 
 const schema = z.object({
   title: z
@@ -29,11 +23,7 @@ const schema = z.object({
     .trim()
     .min(1, 'Required')
     .max(100, 'Max length is 100 characters'),
-  description: z
-    .string()
-    .trim()
-    .min(1, 'Required')
-    .max(200, 'Max length is 200 characters'),
+  description: z.string().trim().max(200, 'Max length is 200 characters'),
   subtasks: z
     .object({
       id: z.string(),
@@ -44,7 +34,8 @@ const schema = z.object({
         .max(50, 'Max length is 50 characters'),
       isCompleted: z.boolean()
     })
-    .array(),
+    .array()
+    .max(10, 'The maximum subtasks you can add is 10'),
   template_id: z.number()
 })
 
@@ -106,28 +97,21 @@ export const CreateTaskForm = ({
             arrayField='subtasks'
             label='Subtasks'
             control={control}
-            error={formState.errors.subtasks?.root}
+            error={formState.errors.subtasks as FieldError}
           >
             {({ fields, append, remove }) => (
               <Stack>
-                <Stack maxH='8.5rem' overflow='scroll'>
+                <Stack gap={1} maxH='9rem' overflow='scroll'>
                   {fields.map((field, index) => (
-                    <HStack key={field.id}>
-                      <FormControl isInvalid={!!formState.errors.subtasks}>
-                        <Input
-                          {...register(`subtasks.${index}.name`)}
-                          placeholder={getSubtaskPlaceholder(index)}
-                        />
-                      </FormControl>
-                      <Icon
-                        as={IoMdClose}
-                        color='#A1ADC0'
-                        boxSize={7}
-                        cursor='pointer'
-                        _hover={{ color: 'orange.500' }}
-                        onClick={() => remove(index)}
-                      />
-                    </HStack>
+                    <DynamicInputField
+                      key={field.id}
+                      id={field.id}
+                      registration={register(`subtasks.${index}.name`)}
+                      placeholder={getSubtaskPlaceholder(index)}
+                      onRemove={() => remove(index)}
+                      error={formState.errors.subtasks?.[index]?.name}
+                      type='text'
+                    />
                   ))}
                 </Stack>
 

@@ -4,7 +4,7 @@ import * as React from 'react'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { CreateBoardForm } from './CreateBoardForm'
 
-export const CreateBoard = () => {
+export const CreateBoardIcon = () => {
   const { colorMode } = useColorMode()
   const { isOpen, onOpen: openCreateBoardForm, onClose } = useDisclosure()
 
@@ -19,6 +19,7 @@ export const CreateBoard = () => {
         title='new board'
         onClick={openCreateBoardForm}
       />
+
       <Modal title='New Board' isOpen={isOpen} onClose={onClose}>
         <CreateBoardForm closeModal={onClose} />
       </Modal>

@@ -3,7 +3,6 @@ import type {
   FieldValues,
   Control,
   ArrayPath,
-  UseFieldArrayProps,
   UseFieldArrayReturn
 } from 'react-hook-form'
 import { useFieldArray } from 'react-hook-form'
@@ -13,7 +12,6 @@ import type { SystemStyleObject } from '@chakra-ui/react'
 type DynamicInputFieldsProps<TFormValues extends FieldValues> = {
   arrayField: ArrayPath<TFormValues>
   label?: string
-  rules?: UseFieldArrayProps['rules']
   control: Control<TFormValues>
   error: FieldError | undefined
   sx?: SystemStyleObject
@@ -23,7 +21,6 @@ type DynamicInputFieldsProps<TFormValues extends FieldValues> = {
 export const DynamicInputFields = <TFormValues extends FieldValues>({
   arrayField,
   label,
-  rules,
   control,
   error,
   sx,
@@ -31,9 +28,7 @@ export const DynamicInputFields = <TFormValues extends FieldValues>({
 }: DynamicInputFieldsProps<TFormValues>) => {
   const methods = useFieldArray<TFormValues>({
     name: arrayField,
-    control,
-    // Rules applied will only work through built-in validation, resolvers are yet to support useFieldArray root level validation. (see rules props at https://react-hook-form.com/api/usefieldarray)
-    rules
+    control
   })
 
   return (

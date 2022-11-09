@@ -11,12 +11,12 @@ import {
   useDisclosure,
   useColorModeValue
 } from '@chakra-ui/react'
-import { useLogout } from '@/features/auth/hooks'
+import { useSignOut } from '@/features/auth/hooks'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { VscTrash, VscSignOut } from 'react-icons/vsc'
 import { Alert } from '../Elements'
 import { useBoard, useDeleteBoard } from '@/features/boards/hooks'
-import { CreateTask } from '@/features/tasks/components'
+import { CreateTaskButton } from '@/features/tasks/components'
 
 export const Header = () => {
   const {
@@ -25,11 +25,11 @@ export const Header = () => {
     onClose: closeAlertDialog
   } = useDisclosure()
   const board = useBoard()
-  const logoutMutation = useLogout()
-  const deleteBoardMutation = useDeleteBoard()
+  const signOut = useSignOut()
+  const deleteBoard = useDeleteBoard()
 
   const handleDeleteBoard = () => {
-    deleteBoardMutation.mutate(board?.id, {
+    deleteBoard.mutate(board.id, {
       onSuccess: () => {
         closeAlertDialog()
       }
@@ -57,7 +57,7 @@ export const Header = () => {
       </Text>
 
       <Flex gap={3}>
-        {board && <CreateTask />}
+        {board && <CreateTaskButton />}
 
         <Menu>
           <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} />
@@ -70,10 +70,7 @@ export const Header = () => {
               Delete Board
             </MenuItem>
             <MenuDivider />
-            <MenuItem
-              onClick={() => logoutMutation.mutate()}
-              icon={<VscSignOut />}
-            >
+            <MenuItem icon={<VscSignOut />} onClick={() => signOut.mutate()}>
               Sign Out
             </MenuItem>
           </MenuList>
@@ -86,7 +83,7 @@ export const Header = () => {
         isOpen={isOpen}
         onClose={closeAlertDialog}
         onConfirm={handleDeleteBoard}
-        loadingAction={deleteBoardMutation.isLoading}
+        loadingAction={deleteBoard.isLoading}
       />
     </GridItem>
   )

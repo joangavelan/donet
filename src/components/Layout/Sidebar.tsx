@@ -9,16 +9,16 @@ import {
 import { Logo } from '../Logo'
 import { NavLink } from 'react-router-dom'
 import { BsMoon, BsSun } from 'react-icons/bs'
-import { BoardList, CreateBoard } from '@/features/boards/components'
+import { BoardList, CreateBoardIcon } from '@/features/boards/components'
 
 export const Sidebar = () => {
   const { toggleColorMode } = useColorMode()
 
   return (
     <GridItem
-      display='grid'
       as='aside'
       area='aside'
+      display='grid'
       gridTemplateRows={'100px auto 1fr auto'}
       borderRight='1px'
       borderColor={useColorModeValue('blackAlpha.200', 'whiteAlpha.200')}
@@ -32,7 +32,7 @@ export const Sidebar = () => {
           <NavLink to='/boards'>BOARDS</NavLink>
         </Text>
 
-        <CreateBoard />
+        <CreateBoardIcon />
       </HStack>
 
       <BoardList />

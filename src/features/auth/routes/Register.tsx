@@ -7,7 +7,7 @@ export const Register = () => {
       <RegisterForm />
       <Redirects
         question='Already have an account?'
-        toggleLink={{ text: 'Sign in', href: '/auth/login' }}
+        link={{ text: 'Sign in', href: '/auth/login' }}
       />
     </Layout>
   )

@@ -1,4 +1,4 @@
 export * from './Template'
 export * from './Templates'
-export * from './AddTemplate'
+export * from './AddTemplateColumn'
 export * from './AddTemplateForm'

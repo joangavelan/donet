@@ -4,7 +4,7 @@ import type { PostgrestError } from '@supabase/supabase-js'
 import { useMutation, useQueryClient } from 'react-query'
 import { createTemplate } from '../api'
 
-export const useCreateTemplate = () => {
+export const useAddTemplate = () => {
   const queryClient = useQueryClient()
   const showNotification = useNotification()
   const board = useBoard()

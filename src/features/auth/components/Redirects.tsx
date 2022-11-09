@@ -3,24 +3,24 @@ import { Link } from 'react-router-dom'
 
 type RedirectsProps = {
   question: string
-  toggleLink: {
+  link: {
     href: string
     text: string
   }
 }
 
-export const Redirects = ({ question, toggleLink }: RedirectsProps) => {
+export const Redirects = ({ question, link }: RedirectsProps) => {
   return (
     <VStack>
       <Text>{question}</Text>
       <Text
         as={Link}
-        to={toggleLink.href}
+        to={link.href}
         color='redirectLinkColor'
         fontWeight='semibold'
         _hover={{ textDecoration: 'underline' }}
       >
-        {toggleLink.text}
+        {link.text}
       </Text>
     </VStack>
   )

@@ -4,7 +4,7 @@ import { useBoard } from '@/features/boards/hooks'
 import { useNotification } from '@/hooks'
 import { Button, HStack } from '@chakra-ui/react'
 import * as z from 'zod'
-import { useCreateTemplate } from '../hooks'
+import { useAddTemplate } from '../hooks'
 
 const schema = z.object({
   name: z
@@ -22,7 +22,7 @@ type AddTemplateFormProps = {
 }
 
 export const AddTemplateForm = ({ closeModal }: AddTemplateFormProps) => {
-  const createTemplate = useCreateTemplate()
+  const addTemplate = useAddTemplate()
   const board = useBoard()
   const user = useUser()
   const showNotification = useNotification()
@@ -31,14 +31,14 @@ export const AddTemplateForm = ({ closeModal }: AddTemplateFormProps) => {
     <Form<FormValues>
       schema={schema}
       onSubmit={({ name }) => {
-        createTemplate.mutate(
+        addTemplate.mutate(
           {
             name,
             user_id: user.id,
             board_id: board.id
           },
           {
-            onSuccess: async () => {
+            onSuccess: () => {
               showNotification({
                 type: 'success',
                 message: 'New template added'
@@ -62,7 +62,7 @@ export const AddTemplateForm = ({ closeModal }: AddTemplateFormProps) => {
             type='submit'
             colorScheme='orange'
             px={8}
-            isLoading={createTemplate.isLoading}
+            isLoading={addTemplate.isLoading}
           >
             Add Template
           </Button>
