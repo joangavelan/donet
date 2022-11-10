@@ -59,7 +59,7 @@ export const Template = ({ id, name }: Templates['Row']) => {
           />
           <Alert
             header='Archive Template'
-            body='Are you sure you want to archive this template?'
+            body='Are you sure you want to archive this template? All tasks within this template will also be archived.'
             confirmText='Archive'
             onConfirm={handleArchiveTemplate}
             isOpen={isOpen}
