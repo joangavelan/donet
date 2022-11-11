@@ -1,18 +1,17 @@
 import { Modal } from '@/components/Elements'
-import { Icon, useColorMode, useDisclosure } from '@chakra-ui/react'
+import { Icon, useDisclosure, useColorModeValue } from '@chakra-ui/react'
 import * as React from 'react'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { CreateBoardForm } from './CreateBoardForm'
 
 export const CreateBoardIcon = () => {
-  const { colorMode } = useColorMode()
   const { isOpen, onOpen: openCreateBoardForm, onClose } = useDisclosure()
 
   return (
     <React.Fragment>
       <Icon
         as={AiOutlinePlusCircle}
-        color={colorMode === 'light' ? 'blackAlpha.800' : 'whiteAlpha.800'}
+        color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
         boxSize={4}
         cursor='pointer'
         _hover={{ color: 'orange.400' }}
