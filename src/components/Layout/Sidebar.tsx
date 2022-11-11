@@ -1,25 +1,16 @@
-import {
-  useColorMode,
-  Text,
-  HStack,
-  GridItem,
-  Button,
-  useColorModeValue
-} from '@chakra-ui/react'
+import { Text, HStack, GridItem, useColorModeValue } from '@chakra-ui/react'
 import { Logo } from '../Logo'
 import { NavLink } from 'react-router-dom'
-import { BsMoon, BsSun } from 'react-icons/bs'
 import { BoardList, CreateBoardIcon } from '@/features/boards/components'
+import { ColorModeToggle } from '../Elements'
 
 export const Sidebar = () => {
-  const { toggleColorMode } = useColorMode()
-
   return (
     <GridItem
       as='aside'
       area='aside'
       display='grid'
-      gridTemplateRows={'100px auto 1fr auto'}
+      gridTemplateRows={'100px auto 1fr 70px'}
       borderRight='1px'
       borderColor={useColorModeValue('blackAlpha.200', 'whiteAlpha.200')}
       gap={7}
@@ -37,19 +28,7 @@ export const Sidebar = () => {
 
       <BoardList />
 
-      <HStack
-        gap={1}
-        bg={useColorModeValue('blackAlpha.200', 'whiteAlpha.200')}
-        maxW='max-content'
-        borderRadius='md'
-        mb={7}
-        paddingEnd={5}
-      >
-        <Button onClick={toggleColorMode}>
-          {useColorModeValue(<BsMoon />, <BsSun fontSize='1.2rem' />)}
-        </Button>
-        <p>{useColorModeValue('Light Mode', 'Dark Mode')}</p>
-      </HStack>
+      <ColorModeToggle />
     </GridItem>
   )
 }
