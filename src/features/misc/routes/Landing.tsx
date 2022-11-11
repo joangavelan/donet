@@ -5,9 +5,9 @@ import {
   Text,
   Link,
   Image,
-  Icon,
   VStack,
-  Button
+  Button,
+  HStack
 } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 import { AiOutlineHome, AiOutlineGithub } from 'react-icons/ai'
@@ -65,24 +65,23 @@ export const Landing = () => {
           .
         </Text>
 
-        <Flex gap={[6, 8]}>
-          <Button colorScheme='orange' onClick={handleStart}>
-            <Icon as={AiOutlineHome} />
-            <Text as='span' ml={1.5}>
-              Get Started
-            </Text>
+        <HStack gap={[4, 6]}>
+          <Button
+            leftIcon={<AiOutlineHome />}
+            colorScheme='orange'
+            onClick={handleStart}
+          >
+            Get Started
           </Button>
           <Button
+            leftIcon={<AiOutlineGithub />}
             as='a'
             href='https://github.com/joangavelan/donet'
             target='_blank'
           >
-            <Icon as={AiOutlineGithub} />
-            <Text as='span' ml={1.5}>
-              Github Repo
-            </Text>
+            Github Repo
           </Button>
-        </Flex>
+        </HStack>
       </VStack>
     </Flex>
   )
