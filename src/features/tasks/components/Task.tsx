@@ -28,6 +28,7 @@ export const Task = ({ task }: TaskProps) => {
 
   return (
     <Stack
+      as='article'
       key={task.id}
       p={5}
       bg={useColorModeValue('#f9f9f9', '#242b38')}
@@ -37,7 +38,7 @@ export const Task = ({ task }: TaskProps) => {
       {/* header */}
       <Stack>
         <Text
-          as='h3'
+          as='h4'
           fontWeight='semibold'
           _hover={{
             color: useColorModeValue('orange.700', 'orange.200')

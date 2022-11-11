@@ -43,11 +43,12 @@ export const Template = ({ id, name }: Templates['Row']) => {
     >
       <HStack align='center' justify='space-between'>
         <Text
+          as='h3'
           textTransform='capitalize'
           fontWeight='semibold'
           color={useColorModeValue('#343945', 'gray.400')}
         >
-          {name} ({tasks?.length ?? 0})
+          {name} <Text as='span'>({tasks?.length ?? 0})</Text>
         </Text>
         <>
           <Icon
