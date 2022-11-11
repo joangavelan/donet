@@ -19,9 +19,11 @@ export const Sidebar = () => {
       <Logo />
 
       <HStack>
-        <Text as='h2' fontWeight='semibold' _hover={{ color: 'orange.400' }}>
-          <NavLink to='/boards'>BOARDS</NavLink>
-        </Text>
+        <NavLink to='/boards'>
+          <Text as='h2' fontWeight='semibold' _hover={{ color: 'orange.400' }}>
+            BOARDS
+          </Text>
+        </NavLink>
 
         <CreateBoardIcon />
       </HStack>
