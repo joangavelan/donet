@@ -6,7 +6,8 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  Button
+  Button,
+  useColorModeValue
 } from '@chakra-ui/react'
 
 type AlertProps = {
@@ -42,7 +43,11 @@ export const Alert = ({
             {header}
           </AlertDialogHeader>
 
-          <AlertDialogBody>{body}</AlertDialogBody>
+          <AlertDialogBody
+            color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
+          >
+            {body}
+          </AlertDialogBody>
 
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
