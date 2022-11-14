@@ -1,3 +1,4 @@
+import { Modal } from '@/components/Elements'
 import type { Tasks, Subtasks } from '@/types'
 import { getPercentage } from '@/utils'
 import {
@@ -7,16 +8,24 @@ import {
   Progress,
   Stack,
   Text,
-  useColorModeValue
+  useColorModeValue,
+  useDisclosure
 } from '@chakra-ui/react'
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { getProgressBarColorScheme } from '../utils'
+import { TaskView } from './TaskView'
 
 type TaskProps = {
   task: Tasks['Row']
 }
 
 export const Task = ({ task }: TaskProps) => {
+  const {
+    isOpen: taskViewIsOpen,
+    onClose: closeTaskView,
+    onOpen: openTaskView
+  } = useDisclosure()
+
   const totalSubtasks = JSON.parse(task.subtasks) as Subtasks
   const completedSubtasks = totalSubtasks.filter(
     (subtask) => subtask.isCompleted
@@ -34,6 +43,7 @@ export const Task = ({ task }: TaskProps) => {
       bg={useColorModeValue('#f9f9f9', '#242b38')}
       shadow='md'
       gap={2}
+      borderRadius='lg'
     >
       {/* header */}
       <Stack>
@@ -48,6 +58,7 @@ export const Task = ({ task }: TaskProps) => {
           textOverflow='ellipsis'
           overflow='hidden'
           w='max-content'
+          onClick={openTaskView}
         >
           {task.title}
         </Text>
@@ -89,6 +100,11 @@ export const Task = ({ task }: TaskProps) => {
           />
         </Stack>
       )}
+
+      {/* task view */}
+      <Modal isOpen={taskViewIsOpen} onClose={closeTaskView} topPosition='17%'>
+        <TaskView task={task} />
+      </Modal>
     </Stack>
   )
 }
