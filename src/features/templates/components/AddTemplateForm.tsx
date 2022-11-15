@@ -1,5 +1,4 @@
 import { Form, InputField } from '@/components/Form'
-import { useUser } from '@/features/auth/hooks'
 import { useBoard } from '@/features/boards/hooks'
 import { useNotification } from '@/hooks'
 import { Button, HStack } from '@chakra-ui/react'
@@ -22,9 +21,8 @@ type AddTemplateFormProps = {
 }
 
 export const AddTemplateForm = ({ closeModal }: AddTemplateFormProps) => {
-  const addTemplate = useAddTemplate()
   const board = useBoard()
-  const user = useUser()
+  const addTemplate = useAddTemplate()
   const showNotification = useNotification()
 
   return (
@@ -34,7 +32,6 @@ export const AddTemplateForm = ({ closeModal }: AddTemplateFormProps) => {
         addTemplate.mutate(
           {
             name,
-            user_id: user.id,
             board_id: board.id
           },
           {

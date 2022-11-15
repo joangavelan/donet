@@ -1,5 +1,5 @@
 import { Modal } from '@/components/Elements'
-import type { Tasks, Subtasks } from '@/types'
+import type { Tasks } from '@/types'
 import { getPercentage } from '@/utils'
 import {
   Box,
@@ -26,13 +26,12 @@ export const Task = ({ task }: TaskProps) => {
     onOpen: openTaskView
   } = useDisclosure()
 
-  const totalSubtasks = JSON.parse(task.subtasks) as Subtasks
-  const completedSubtasks = totalSubtasks.filter(
-    (subtask) => subtask.isCompleted
+  const completedSubtasks = task.subtasks.filter(
+    (subtask) => subtask.is_completed
   )
   const progressPercentage = getPercentage(
     completedSubtasks.length,
-    totalSubtasks.length
+    task.subtasks.length
   )
 
   return (
@@ -78,7 +77,7 @@ export const Task = ({ task }: TaskProps) => {
       </Stack>
 
       {/* progress */}
-      {!!totalSubtasks.length && (
+      {!!task.subtasks.length && (
         <Stack gap={1}>
           <HStack justify='space-between' fontSize='sm'>
             <HStack
@@ -89,7 +88,7 @@ export const Task = ({ task }: TaskProps) => {
             </HStack>
 
             <Box as='span'>
-              {completedSubtasks.length}/{totalSubtasks.length}
+              {completedSubtasks.length}/{task.subtasks.length}
             </Box>
           </HStack>
 

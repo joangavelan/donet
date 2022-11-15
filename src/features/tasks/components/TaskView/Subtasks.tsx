@@ -1,4 +1,4 @@
-import type { Subtasks as TSubtasks, Tasks } from '@/types'
+import type { Tasks } from '@/types'
 import {
   Checkbox,
   HStack,
@@ -8,12 +8,12 @@ import {
 } from '@chakra-ui/react'
 
 type SubtasksProps = {
-  subtasks: TSubtasks
+  subtasks: Tasks['Row']['subtasks']
   handleTaskUpdate: (updatedTaskProps: Tasks['Update']) => void
 }
 
 export const Subtasks = ({ subtasks, handleTaskUpdate }: SubtasksProps) => {
-  const completedSubtasks = subtasks.filter((subtask) => subtask.isCompleted)
+  const completedSubtasks = subtasks.filter((subtask) => subtask.is_completed)
 
   const handleCheck = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -21,11 +21,11 @@ export const Subtasks = ({ subtasks, handleTaskUpdate }: SubtasksProps) => {
   ) => {
     const updatedSubtasks = subtasks.map((subtask) => {
       if (subtask.id === subtaskId) {
-        return { ...subtask, isCompleted: e.target.checked }
+        return { ...subtask, is_completed: e.target.checked }
       }
       return subtask
     })
-    handleTaskUpdate({ subtasks: JSON.stringify(updatedSubtasks) })
+    handleTaskUpdate({ subtasks: updatedSubtasks })
   }
 
   if (!subtasks.length) {
@@ -48,7 +48,7 @@ export const Subtasks = ({ subtasks, handleTaskUpdate }: SubtasksProps) => {
             bg={useColorModeValue('orange.100', 'blackAlpha.400')}
           >
             <Checkbox
-              defaultChecked={subtask.isCompleted}
+              defaultChecked={subtask.is_completed}
               onChange={(e) => handleCheck(e, subtask.id)}
               colorScheme='orange'
               borderColor={useColorModeValue('blackAlpha.700', '')}

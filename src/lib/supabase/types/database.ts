@@ -1,3 +1,7 @@
+import type { FormValues as CreateTaskFormFields } from '@/features/tasks/components'
+
+export type Subtasks = CreateTaskFormFields['subtasks']
+
 export type Json =
   | string
   | number
@@ -14,20 +18,20 @@ export interface Database {
         Row: {
           id: number
           name: string
-          user_id: string
           slug: string
+          user_id: string
         }
         Insert: {
           id?: number
           name: string
-          user_id: string
           slug: string
+          user_id: string
         }
         Update: {
           id?: number
           name?: string
-          user_id?: string
           slug?: string
+          user_id?: string
         }
       }
       tasks: {
@@ -35,24 +39,21 @@ export interface Database {
           id: number
           title: string
           description: string
-          subtasks: string
-          user_id: string
+          subtasks: Subtasks
           template_id: number
         }
         Insert: {
           id?: number
           title: string
           description: string
-          subtasks: string
-          user_id: string
+          subtasks: Subtasks
           template_id: number
         }
         Update: {
           id?: number
           title?: string
           description?: string
-          subtasks?: string
-          user_id?: string
+          subtasks?: Subtasks
           template_id?: number
         }
       }
@@ -60,19 +61,16 @@ export interface Database {
         Row: {
           id: number
           name: string
-          user_id: string
           board_id: number
         }
         Insert: {
           id?: number
           name: string
-          user_id: string
           board_id: number
         }
         Update: {
           id?: number
           name?: string
-          user_id?: string
           board_id?: number
         }
       }

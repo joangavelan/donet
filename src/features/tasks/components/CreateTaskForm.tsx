@@ -13,7 +13,6 @@ import { toTitleCase } from '@/utils'
 import { getSubtaskPlaceholder } from '../utils'
 import { useCreateTask } from '../hooks'
 import { useNotification } from '@/hooks'
-import { useUser } from '@/features/auth/hooks'
 import { nanoid } from 'nanoid'
 import type { FieldError } from 'react-hook-form'
 
@@ -32,7 +31,7 @@ const schema = z.object({
         .trim()
         .min(1, 'Required')
         .max(50, 'Max length is 50 characters'),
-      isCompleted: z.boolean()
+      is_completed: z.boolean()
     })
     .array()
     .max(10, 'The maximum subtasks you can add is 10'),
@@ -52,7 +51,6 @@ export const CreateTaskForm = ({
 }: CreateTaskFormProps) => {
   const createTask = useCreateTask()
   const showNotification = useNotification()
-  const user = useUser()
 
   return (
     <Form<FormValues>
@@ -63,9 +61,8 @@ export const CreateTaskForm = ({
           {
             title,
             description,
-            template_id,
-            subtasks: JSON.stringify(subtasks),
-            user_id: user.id
+            subtasks,
+            template_id
           },
           {
             onSuccess: () => {
@@ -119,7 +116,7 @@ export const CreateTaskForm = ({
                   colorScheme='orange'
                   variant='outline'
                   onClick={() =>
-                    append({ id: nanoid(), name: '', isCompleted: false })
+                    append({ id: nanoid(), name: '', is_completed: false })
                   }
                 >
                   + Add New Subtask
