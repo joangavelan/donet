@@ -1,4 +1,3 @@
-import { deleteTemplatesFromBoard } from '@/features/templates/api'
 import { useNotification } from '@/hooks'
 import type { PostgrestError } from '@supabase/supabase-js'
 import { useMutation, useQueryClient } from 'react-query'
@@ -11,14 +10,6 @@ export const useDeleteBoard = () => {
   const navigate = useNavigate()
 
   return useMutation(deleteBoard, {
-    onMutate: async (boardId) => {
-      try {
-        await deleteTemplatesFromBoard(boardId)
-      } catch (error) {
-        const { message } = error as PostgrestError
-        showNotification({ type: 'error', message })
-      }
-    },
     onSuccess: async () => {
       await queryClient.invalidateQueries(['boards'])
       showNotification({
