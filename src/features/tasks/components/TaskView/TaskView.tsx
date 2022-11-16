@@ -22,7 +22,7 @@ export const TaskView = ({ task }: TaskViewProps) => {
 
   return (
     <Stack gap={5}>
-      <Header>{task.title}</Header>
+      <Header taskId={task.id}>{task.title}</Header>
       <Description>{task.description || 'No description'}</Description>
       <Subtasks subtasks={task.subtasks} handleTaskUpdate={handleTaskUpdate} />
       <Template
