@@ -1,6 +1,5 @@
 import { Modal } from '@/components/Elements'
 import { Button, Grid, Spinner, Text, useDisclosure, VStack } from '@chakra-ui/react'
-
 import { useBoards } from '../hooks'
 import { BoardItem, CreateBoardForm } from '../components'
 
@@ -47,7 +46,7 @@ export const Boards = () => {
   return (
     <Grid
       as='ul'
-      gridTemplateColumns='repeat(4,1fr)'
+      gridTemplateColumns='repeat(4, minmax(max-content, 1fr))'
       gridAutoRows='minmax(min-content, max-content)'
       gap={10}
       h='100%'

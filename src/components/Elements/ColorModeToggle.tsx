@@ -12,6 +12,14 @@ export const ColorModeToggle = () => {
       h='max-content'
       borderRadius='md'
       paddingEnd={5}
+      sx={{
+        '& *': {
+          fontSize: {
+            base: '99%',
+            lg: '100%'
+          }
+        }
+      }}
     >
       <Button onClick={toggleColorMode}>
         {useColorModeValue(<BsMoon />, <BsSun fontSize='1.2rem' />)}

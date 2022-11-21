@@ -7,6 +7,13 @@ const config: ThemeConfig = {
 
 const styles = {
   global: {
+    html: {
+      fontSize: {
+        base: '90%',
+        md: '95%',
+        lg: '100%'
+      }
+    },
     ul: {
       listStyle: 'none'
     },

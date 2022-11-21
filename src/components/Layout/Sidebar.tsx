@@ -9,7 +9,7 @@ export const Sidebar = () => {
     <GridItem
       as='aside'
       area='aside'
-      display='grid'
+      display={{ base: 'none', lg: 'grid' }}
       gridTemplateRows={'100px auto 1fr 70px'}
       borderRight='1px'
       borderColor={useColorModeValue('blackAlpha.200', 'whiteAlpha.200')}

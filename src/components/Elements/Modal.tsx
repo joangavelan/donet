@@ -27,7 +27,7 @@ export const Modal = ({
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size='lg'>
       <ModalOverlay />
-      <ModalContent top={topPosition} pb={4} pt={title ? 0 : 4} sx={sx}>
+      <ModalContent top={topPosition} pb={4} pt={title ? 0 : 4} sx={sx} w='90%'>
         {title && <ModalHeader>{title}</ModalHeader>}
         <ModalBody>{children}</ModalBody>
       </ModalContent>

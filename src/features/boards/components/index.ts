@@ -1,4 +1,5 @@
-export * from './BoardList'
 export * from './BoardItem'
-export * from './CreateBoardIcon'
+export * from './BoardList'
 export * from './CreateBoardForm'
+export * from './CreateBoardIcon'
+export * from './BoardsPopover'

@@ -26,9 +26,13 @@ export const AppContainer = ({ children }: { children: React.ReactNode }) => {
       </Helmet>
 
       <Grid
-        gridTemplateAreas={`"aside header"
-                            "aside main"`}
-        gridTemplateColumns={'minmax(30%, 400px) 1fr'}
+        gridTemplateAreas={{
+          base: `"header"
+                  "main"`,
+          lg: `"aside header"
+                "aside main"`
+        }}
+        gridTemplateColumns={{ base: '1fr', lg: '400px 1fr' }}
         gridTemplateRows={'100px 1fr'}
         h='100vh'
       >

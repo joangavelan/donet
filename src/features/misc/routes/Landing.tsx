@@ -39,7 +39,7 @@ export const Landing = () => {
           <Text fontSize={['md', 'lg']}>Your centralized task management app.</Text>
         </Box>
 
-        <Image src='/checklist.png' w={[52, 60]} alt='checklist logo' />
+        <Image src='/checklist.png' w={[48, 60]} alt='checklist logo' />
 
         <Text fontSize={['md', 'lg']}>
           This project is part of a personal portfolio. You can find more projects like this on my

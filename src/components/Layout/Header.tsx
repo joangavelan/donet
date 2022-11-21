@@ -9,7 +9,9 @@ import {
   Text,
   GridItem,
   useDisclosure,
-  useColorModeValue
+  useColorModeValue,
+  HStack,
+  Box
 } from '@chakra-ui/react'
 import { useSignOut } from '@/features/auth/hooks'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -17,6 +19,8 @@ import { VscTrash, VscSignOut } from 'react-icons/vsc'
 import { Alert } from '../Elements'
 import { useBoard, useDeleteBoard } from '@/features/boards/hooks'
 import { CreateTaskButton } from '@/features/tasks/components'
+import { BoardsPopover } from '@/features/boards/components'
+import { Logo } from '../Logo'
 
 export const Header = () => {
   const { isOpen, onOpen: openAlertDialog, onClose: closeAlertDialog } = useDisclosure()
@@ -43,15 +47,33 @@ export const Header = () => {
       borderBottom='1px'
       borderColor={useColorModeValue('blackAlpha.200', 'whiteAlpha.200')}
     >
-      <Text as='h1' fontSize='2xl' fontWeight='semibold' textTransform='capitalize'>
-        {board?.name ?? 'Boards'}
-      </Text>
+      <HStack gap={1.2}>
+        <Box display={{ base: 'block', lg: 'none' }}>
+          <Logo />
+        </Box>
+
+        <Text
+          as='h1'
+          fontSize={{ base: '1.25rem', lg: '2xl' }}
+          fontWeight='semibold'
+          textTransform='capitalize'
+          display={{ base: 'none', lg: 'inline-block' }}
+        >
+          {board?.name ?? 'Boards'}
+        </Text>
+
+        <BoardsPopover boardTitle={board?.name ?? 'Boards'} />
+      </HStack>
 
       <Flex gap={3}>
         {board && <CreateTaskButton />}
 
         <Menu>
-          <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} />
+          <MenuButton
+            as={IconButton}
+            icon={<BsThreeDotsVertical />}
+            size={{ base: 'sm', lg: 'md' }}
+          />
           <MenuList sx={{ '.chakra-menu__icon': { fontSize: 'md' } }}>
             <MenuItem isDisabled={!board} onClick={openAlertDialog} icon={<VscTrash />}>
               Delete Board
@@ -62,16 +84,16 @@ export const Header = () => {
             </MenuItem>
           </MenuList>
         </Menu>
-      </Flex>
 
-      <Alert
-        header='Delete board'
-        body='Are you sure you want to delete this board?'
-        isOpen={isOpen}
-        onClose={closeAlertDialog}
-        onConfirm={handleDeleteBoard}
-        loadingAction={deleteBoard.isLoading}
-      />
+        <Alert
+          header='Delete board'
+          body='Are you sure you want to delete this board?'
+          isOpen={isOpen}
+          onClose={closeAlertDialog}
+          onConfirm={handleDeleteBoard}
+          loadingAction={deleteBoard.isLoading}
+        />
+      </Flex>
     </GridItem>
   )
 }

@@ -21,7 +21,7 @@ export const BoardItem = ({ id, name, slug }: Boards['Row']) => {
         }
       }}
     >
-      <Stack as={NavLink} to={slug} p={5}>
+      <Stack as={NavLink} to={slug} p={{ base: 3.5, lg: 5 }}>
         <HStack>
           <Text fontWeight='semibold'>{name}</Text>
           <Icon as={AiOutlineArrowRight} transition='ease-in-out' transitionDuration='200ms' />

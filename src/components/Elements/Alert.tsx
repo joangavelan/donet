@@ -34,7 +34,7 @@ export const Alert = ({
   return (
     <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
       <AlertDialogOverlay>
-        <AlertDialogContent top='20%'>
+        <AlertDialogContent top='20%' w='90%'>
           <AlertDialogHeader fontSize='lg' fontWeight='bold'>
             {header}
           </AlertDialogHeader>
