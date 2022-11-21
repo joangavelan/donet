@@ -9,54 +9,16 @@ export const useUpdateTask = () => {
   const showNotification = useNotification()
 
   return useMutation(updateTask, {
-    onMutate: async ({ originalTask, updatedProps }) => {
+    onMutate: async (updatedTask) => {
       await queryClient.cancelQueries(['tasks'])
 
-      const previousTasksFromOriginalTemplate = queryClient.getQueryData([
-        'tasks',
-        originalTask.template_id
-      ]) as Array<Tasks['Row']>
-
-      const previousTasksFromNewTemplate =
-        updatedProps.template_id &&
-        (queryClient.getQueryData(['tasks', updatedProps.template_id]) as Array<Tasks['Row']>)
-
-      const updatedTask = { ...originalTask, ...updatedProps }
-
-      if (previousTasksFromNewTemplate) {
-        queryClient.setQueryData(
-          ['tasks', updatedProps.template_id],
-          [...previousTasksFromNewTemplate, updatedTask]
+      queryClient.setQueryData(['tasks', updatedTask.template_id], (tasks) => {
+        return (tasks as Array<Tasks['Row']>).map((task) =>
+          task.id === updatedTask.id ? updatedTask : task
         )
-
-        queryClient.setQueryData(
-          ['tasks', originalTask.template_id],
-          previousTasksFromOriginalTemplate.filter((task) => originalTask.id !== task.id)
-        )
-      } else {
-        queryClient.setQueryData(
-          ['tasks', originalTask.template_id],
-          previousTasksFromOriginalTemplate.map((task) =>
-            originalTask.id === task.id ? updatedTask : task
-          )
-        )
-      }
-
-      return { previousTasksFromOriginalTemplate, previousTasksFromNewTemplate }
+      })
     },
-    onError: (error, { originalTask, updatedProps }, context) => {
-      if (updatedProps.template_id) {
-        queryClient.setQueryData(
-          ['tasks', updatedProps.template_id],
-          context?.previousTasksFromNewTemplate
-        )
-      }
-
-      queryClient.setQueryData(
-        ['tasks', originalTask.template_id],
-        context?.previousTasksFromOriginalTemplate
-      )
-
+    onError: (error) => {
       const { message } = error as PostgrestError
       showNotification({ type: 'error', message })
     },

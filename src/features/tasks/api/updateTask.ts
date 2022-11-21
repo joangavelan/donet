@@ -1,16 +1,11 @@
 import { supabase } from '@/lib/supabase'
 import type { Tasks } from '@/types'
 
-type Payload = {
-  originalTask: Tasks['Row']
-  updatedProps: Tasks['Update']
-}
-
-export const updateTask = async ({ originalTask, updatedProps }: Payload) => {
+export const updateTask = async (task: Tasks['Row']) => {
   const { data: updatedTask, error } = await supabase
     .from('tasks')
-    .update({ ...originalTask, ...updatedProps })
-    .eq('id', originalTask.id)
+    .update(task)
+    .eq('id', task.id)
     .select()
     .single()
 
