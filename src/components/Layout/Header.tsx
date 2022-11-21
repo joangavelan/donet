@@ -87,7 +87,7 @@ export const Header = () => {
 
         <Alert
           header='Delete board'
-          body='Are you sure you want to delete this board?'
+          body='Are you sure you want to delete this board? All templates and tasks within this board will also be deleted.'
           isOpen={isOpen}
           onClose={closeAlertDialog}
           onConfirm={handleDeleteBoard}
