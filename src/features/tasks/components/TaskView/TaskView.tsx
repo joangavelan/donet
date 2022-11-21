@@ -25,10 +25,7 @@ export const TaskView = ({ task }: TaskViewProps) => {
       <Header taskId={task.id}>{task.title}</Header>
       <Description>{task.description || 'No description'}</Description>
       <Subtasks subtasks={task.subtasks} handleTaskUpdate={handleTaskUpdate} />
-      <Template
-        templateId={task.template_id}
-        handleTaskUpdate={handleTaskUpdate}
-      />
+      <Template originalTask={task} />
     </Stack>
   )
 }

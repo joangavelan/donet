@@ -1,12 +1,11 @@
 import { Alert } from '@/components/Elements'
-import { Task } from '@/features/tasks/components'
+import { Tasks } from '@/features/tasks/components'
 import { useTasks } from '@/features/tasks/hooks'
 import type { Templates } from '@/types'
 import {
   GridItem,
   HStack,
   Icon,
-  Stack,
   Text,
   useColorModeValue,
   useDisclosure
@@ -37,7 +36,6 @@ export const Template = ({ id, name }: Templates['Row']) => {
       display='flex'
       flexDirection='column'
       height='max-content'
-      gap={5}
       p={5}
       bg={useColorModeValue('orange.50', '#1f2431')}
     >
@@ -70,13 +68,7 @@ export const Template = ({ id, name }: Templates['Row']) => {
         </>
       </HStack>
 
-      {!!tasks?.length && (
-        <Stack gap={5}>
-          {tasks.map((task) => (
-            <Task key={task.id} task={task} />
-          ))}
-        </Stack>
-      )}
+      {tasks && <Tasks templateId={id} tasks={tasks} />}
     </GridItem>
   )
 }

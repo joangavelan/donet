@@ -2,18 +2,56 @@ import { Select, Stack, Text } from '@chakra-ui/react'
 import { useBoard } from '@/features/boards/hooks'
 import { useTemplates } from '@/features/templates/hooks'
 import type { Tasks } from '@/types'
+import { useUpsertTasks } from '../../hooks'
+import { useQueryClient } from 'react-query'
 
 type TemplateProps = {
-  templateId: number
-  handleTaskUpdate: (updatedTaskProps: Tasks['Update']) => void
+  originalTask: Tasks['Row']
 }
 
-export const Template = ({ templateId, handleTaskUpdate }: TemplateProps) => {
-  const currentBoard = useBoard()
-  const { data: availableTemplates } = useTemplates(currentBoard.id)
+export const Template = ({ originalTask }: TemplateProps) => {
+  const board = useBoard()
+  const { data: templates } = useTemplates(board.id)
+  const queryClient = useQueryClient()
+  const upsertTasks = useUpsertTasks()
 
   const handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    handleTaskUpdate({ template_id: Number(e.target.value) })
+    const sourceTemplateId = originalTask.template_id
+    const destinationTemplateId = Number(e.target.value)
+
+    queryClient.setQueryData(['tasks', sourceTemplateId], (tasks) => {
+      const updatedSourceTasks = (tasks as Array<Tasks['Row']>)
+        .filter((task) => task.id !== originalTask.id)
+        .map((task, index) => ({ ...task, index }))
+
+      queryClient.setQueryData(['tasks', destinationTemplateId], (tasks) => {
+        const destinationTasks = [...(tasks as Array<Tasks['Row']>)]
+
+        const updatedMovingTask = {
+          ...originalTask,
+          template_id: destinationTemplateId,
+          index: destinationTasks.length
+        }
+
+        destinationTasks.splice(destinationTasks.length, 0, updatedMovingTask)
+
+        const updatedDestinationTasks = destinationTasks.map((task, index) => ({
+          ...task,
+          index
+        }))
+
+        const allUpsertedTasks = [
+          ...updatedSourceTasks,
+          ...updatedDestinationTasks
+        ]
+
+        upsertTasks.mutate(allUpsertedTasks)
+
+        return updatedDestinationTasks
+      })
+
+      return updatedSourceTasks
+    })
   }
 
   return (
@@ -21,8 +59,8 @@ export const Template = ({ templateId, handleTaskUpdate }: TemplateProps) => {
       <Text fontSize='sm' fontWeight='semibold'>
         Template
       </Text>
-      <Select defaultValue={templateId} onChange={handleOnChange}>
-        {availableTemplates?.map(({ id, name }) => (
+      <Select defaultValue={originalTask.template_id} onChange={handleOnChange}>
+        {templates?.map(({ id, name }) => (
           <option key={id} value={id}>
             {name}
           </option>

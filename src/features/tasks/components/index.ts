@@ -1,3 +1,6 @@
 export * from './CreateTaskButton'
 export * from './CreateTaskForm'
 export * from './Task'
+export * from './TaskView'
+export * from './Tasks'
+export * from './DndContext'
