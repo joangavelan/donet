@@ -8,13 +8,14 @@ import {
 } from '@/components/Form'
 import { Stack, Button } from '@chakra-ui/react'
 import * as z from 'zod'
-import type { Templates } from '@/types'
+import type { Tasks, Templates } from '@/types'
 import { toTitleCase } from '@/utils'
 import { getSubtaskPlaceholder } from '../utils'
 import { useCreateTask } from '../hooks'
 import { useNotification } from '@/hooks'
 import { nanoid } from 'nanoid'
 import type { FieldError } from 'react-hook-form'
+import { useQueryClient } from 'react-query'
 
 const schema = z.object({
   title: z
@@ -51,18 +52,25 @@ export const CreateTaskForm = ({
 }: CreateTaskFormProps) => {
   const createTask = useCreateTask()
   const showNotification = useNotification()
+  const queryClient = useQueryClient()
 
   return (
     <Form<FormValues>
       schema={schema}
       // eslint-disable-next-line @typescript-eslint/naming-convention
       onSubmit={({ title, description, template_id, subtasks }) => {
+        const templateTasks = queryClient.getQueryData([
+          'tasks',
+          template_id
+        ]) as Array<Tasks['Row']>
+
         createTask.mutate(
           {
             title,
             description,
             subtasks,
-            template_id
+            template_id,
+            index: templateTasks.length
           },
           {
             onSuccess: () => {

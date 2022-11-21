@@ -5,6 +5,7 @@ export const getTasks = async (templateId: number) => {
     .from('tasks')
     .select()
     .eq('template_id', templateId)
+    .order('index', { ascending: true })
 
   if (error) throw error
 

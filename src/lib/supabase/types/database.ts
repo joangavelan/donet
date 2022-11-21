@@ -41,6 +41,7 @@ export interface Database {
           description: string
           subtasks: Subtasks
           template_id: number
+          index: number
         }
         Insert: {
           id?: number
@@ -48,6 +49,7 @@ export interface Database {
           description: string
           subtasks: Subtasks
           template_id: number
+          index: number
         }
         Update: {
           id?: number
@@ -55,6 +57,7 @@ export interface Database {
           description?: string
           subtasks?: Subtasks
           template_id?: number
+          index?: number
         }
       }
       templates: {
