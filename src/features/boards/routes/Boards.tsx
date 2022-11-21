@@ -1,12 +1,5 @@
 import { Modal } from '@/components/Elements'
-import {
-  Button,
-  Grid,
-  Spinner,
-  Text,
-  useDisclosure,
-  VStack
-} from '@chakra-ui/react'
+import { Button, Grid, Spinner, Text, useDisclosure, VStack } from '@chakra-ui/react'
 
 import { useBoards } from '../hooks'
 import { BoardItem, CreateBoardForm } from '../components'

@@ -15,6 +15,5 @@ export const useNotification = () => {
 
   const toast = useToast(defaultOptions)
 
-  return ({ type, message }: Notification) =>
-    toast({ status: type, description: message })
+  return ({ type, message }: Notification) => toast({ status: type, description: message })
 }

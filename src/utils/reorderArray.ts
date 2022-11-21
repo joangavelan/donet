@@ -13,11 +13,7 @@
  * reorderArray(array, startIndex, endIndex) returns ['a', 'c', 'b']
  */
 
-export const reorderArray = <T>(
-  array: T[],
-  startIndex: number,
-  endIndex: number
-): T[] => {
+export const reorderArray = <T>(array: T[], startIndex: number, endIndex: number): T[] => {
   const newArray = [...array]
   const [removedItem] = newArray.splice(startIndex, 1)
 

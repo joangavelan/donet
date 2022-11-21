@@ -2,13 +2,7 @@ import type { FormValues as CreateTaskFormFields } from '@/features/tasks/compon
 
 export type Subtasks = CreateTaskFormFields['subtasks']
 
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json }
-  | Json[]
+export type Json = string | number | boolean | null | { [key: string]: Json } | Json[]
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface Database {

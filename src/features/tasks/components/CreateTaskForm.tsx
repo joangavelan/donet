@@ -18,20 +18,12 @@ import type { FieldError } from 'react-hook-form'
 import { useQueryClient } from 'react-query'
 
 const schema = z.object({
-  title: z
-    .string()
-    .trim()
-    .min(1, 'Required')
-    .max(100, 'Max length is 100 characters'),
+  title: z.string().trim().min(1, 'Required').max(100, 'Max length is 100 characters'),
   description: z.string().trim().max(200, 'Max length is 200 characters'),
   subtasks: z
     .object({
       id: z.string(),
-      name: z
-        .string()
-        .trim()
-        .min(1, 'Required')
-        .max(50, 'Max length is 50 characters'),
+      name: z.string().trim().min(1, 'Required').max(50, 'Max length is 50 characters'),
       is_completed: z.boolean()
     })
     .array()
@@ -46,10 +38,7 @@ type CreateTaskFormProps = {
   closeModal: () => void
 }
 
-export const CreateTaskForm = ({
-  templates,
-  closeModal
-}: CreateTaskFormProps) => {
+export const CreateTaskForm = ({ templates, closeModal }: CreateTaskFormProps) => {
   const createTask = useCreateTask()
   const showNotification = useNotification()
   const queryClient = useQueryClient()
@@ -59,10 +48,9 @@ export const CreateTaskForm = ({
       schema={schema}
       // eslint-disable-next-line @typescript-eslint/naming-convention
       onSubmit={({ title, description, template_id, subtasks }) => {
-        const templateTasks = queryClient.getQueryData([
-          'tasks',
-          template_id
-        ]) as Array<Tasks['Row']>
+        const templateTasks = queryClient.getQueryData(['tasks', template_id]) as Array<
+          Tasks['Row']
+        >
 
         createTask.mutate(
           {
@@ -123,9 +111,7 @@ export const CreateTaskForm = ({
                 <Button
                   colorScheme='orange'
                   variant='outline'
-                  onClick={() =>
-                    append({ id: nanoid(), name: '', is_completed: false })
-                  }
+                  onClick={() => append({ id: nanoid(), name: '', is_completed: false })}
                 >
                   + Add New Subtask
                 </Button>
@@ -142,11 +128,7 @@ export const CreateTaskForm = ({
               value: id
             }))}
           />
-          <Button
-            colorScheme='orange'
-            type='submit'
-            isLoading={createTask.isLoading}
-          >
+          <Button colorScheme='orange' type='submit' isLoading={createTask.isLoading}>
             Create Task
           </Button>
         </Stack>

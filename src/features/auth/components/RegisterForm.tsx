@@ -68,11 +68,7 @@ export const RegisterForm = () => {
               registration={register('password')}
               type='password'
             />
-            <Button
-              type='submit'
-              colorScheme='orange'
-              isLoading={signUp.isLoading}
-            >
+            <Button type='submit' colorScheme='orange' isLoading={signUp.isLoading}>
               Sign Up
             </Button>
           </Stack>

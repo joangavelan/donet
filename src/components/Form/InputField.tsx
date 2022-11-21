@@ -1,11 +1,6 @@
 import type { UseFormRegisterReturn, FieldError } from 'react-hook-form'
 import type { SystemStyleObject } from '@chakra-ui/react'
-import {
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  FormControl
-} from '@chakra-ui/react'
+import { FormLabel, Input, FormErrorMessage, FormControl } from '@chakra-ui/react'
 import type { HTMLInputTypeAttribute } from 'react'
 
 type InputFieldProps = {

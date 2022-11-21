@@ -1,10 +1,5 @@
 import type { SystemStyleObject } from '@chakra-ui/react'
-import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Select
-} from '@chakra-ui/react'
+import { FormControl, FormErrorMessage, FormLabel, Select } from '@chakra-ui/react'
 import type { FieldError, UseFormRegisterReturn } from 'react-hook-form'
 
 export type Option = {

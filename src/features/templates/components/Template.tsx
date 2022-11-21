@@ -2,23 +2,12 @@ import { Alert } from '@/components/Elements'
 import { Tasks } from '@/features/tasks/components'
 import { useTasks } from '@/features/tasks/hooks'
 import type { Templates } from '@/types'
-import {
-  GridItem,
-  HStack,
-  Icon,
-  Text,
-  useColorModeValue,
-  useDisclosure
-} from '@chakra-ui/react'
+import { GridItem, HStack, Icon, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { BiArchiveIn } from 'react-icons/bi'
 import { useArchiveTemplate } from '../hooks'
 
 export const Template = ({ id, name }: Templates['Row']) => {
-  const {
-    isOpen,
-    onClose: closeAlertDialog,
-    onOpen: openAlertDialog
-  } = useDisclosure()
+  const { isOpen, onClose: closeAlertDialog, onOpen: openAlertDialog } = useDisclosure()
   const archiveTemplate = useArchiveTemplate()
   const { data: tasks } = useTasks(id)
 

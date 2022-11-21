@@ -11,21 +11,15 @@ export const DndContext = ({ children }: { children: React.ReactNode }) => {
 
   const handleDragEnd = (result: DropResult) => {
     const { source, destination } = result
+
     // if user tries to drop in an unknown destination
     if (!destination) return
 
     // if the user drag and drops back in the same position
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
-    )
-      return
+    if (source.droppableId === destination.droppableId && source.index === destination.index) return
 
     // If the user drops within the same column but in a different position
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index !== destination.index
-    ) {
+    if (source.droppableId === destination.droppableId && source.index !== destination.index) {
       const templateId = Number(source.droppableId)
 
       queryCLient.setQueryData(['tasks', templateId], (tasks) => {
@@ -64,17 +58,12 @@ export const DndContext = ({ children }: { children: React.ReactNode }) => {
 
           destinationTasks.splice(destination.index, 0, updatedMovingTask)
 
-          const updatedDestinationTasks = destinationTasks.map(
-            (task, index) => ({
-              ...task,
-              index
-            })
-          )
+          const updatedDestinationTasks = destinationTasks.map((task, index) => ({
+            ...task,
+            index
+          }))
 
-          const allUpsertedTasks = [
-            ...updatedSourceTasks,
-            ...updatedDestinationTasks
-          ]
+          const allUpsertedTasks = [...updatedSourceTasks, ...updatedDestinationTasks]
 
           upsertTasks.mutate(allUpsertedTasks)
 

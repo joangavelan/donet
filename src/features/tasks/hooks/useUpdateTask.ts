@@ -19,9 +19,7 @@ export const useUpdateTask = () => {
 
       const previousTasksFromNewTemplate =
         updatedProps.template_id &&
-        (queryClient.getQueryData(['tasks', updatedProps.template_id]) as Array<
-          Tasks['Row']
-        >)
+        (queryClient.getQueryData(['tasks', updatedProps.template_id]) as Array<Tasks['Row']>)
 
       const updatedTask = { ...originalTask, ...updatedProps }
 
@@ -33,9 +31,7 @@ export const useUpdateTask = () => {
 
         queryClient.setQueryData(
           ['tasks', originalTask.template_id],
-          previousTasksFromOriginalTemplate.filter(
-            (task) => originalTask.id !== task.id
-          )
+          previousTasksFromOriginalTemplate.filter((task) => originalTask.id !== task.id)
         )
       } else {
         queryClient.setQueryData(

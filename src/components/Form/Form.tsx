@@ -1,11 +1,6 @@
 import type { SystemStyleObject } from '@chakra-ui/react'
 import { chakra } from '@chakra-ui/react'
-import type {
-  UseFormReturn,
-  SubmitHandler,
-  UseFormProps,
-  FieldValues
-} from 'react-hook-form'
+import type { UseFormReturn, SubmitHandler, UseFormProps, FieldValues } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import type { Schema } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'

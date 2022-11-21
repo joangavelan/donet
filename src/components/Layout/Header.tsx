@@ -19,11 +19,7 @@ import { useBoard, useDeleteBoard } from '@/features/boards/hooks'
 import { CreateTaskButton } from '@/features/tasks/components'
 
 export const Header = () => {
-  const {
-    isOpen,
-    onOpen: openAlertDialog,
-    onClose: closeAlertDialog
-  } = useDisclosure()
+  const { isOpen, onOpen: openAlertDialog, onClose: closeAlertDialog } = useDisclosure()
   const board = useBoard()
   const signOut = useSignOut()
   const deleteBoard = useDeleteBoard()
@@ -47,12 +43,7 @@ export const Header = () => {
       borderBottom='1px'
       borderColor={useColorModeValue('blackAlpha.200', 'whiteAlpha.200')}
     >
-      <Text
-        as='h1'
-        fontSize='2xl'
-        fontWeight='semibold'
-        textTransform='capitalize'
-      >
+      <Text as='h1' fontSize='2xl' fontWeight='semibold' textTransform='capitalize'>
         {board?.name ?? 'Boards'}
       </Text>
 
@@ -62,11 +53,7 @@ export const Header = () => {
         <Menu>
           <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} />
           <MenuList sx={{ '.chakra-menu__icon': { fontSize: 'md' } }}>
-            <MenuItem
-              isDisabled={!board}
-              onClick={openAlertDialog}
-              icon={<VscTrash />}
-            >
+            <MenuItem isDisabled={!board} onClick={openAlertDialog} icon={<VscTrash />}>
               Delete Board
             </MenuItem>
             <MenuDivider />

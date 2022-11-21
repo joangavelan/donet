@@ -1,11 +1,6 @@
 import type { UseFormRegisterReturn, FieldError } from 'react-hook-form'
 import type { SystemStyleObject } from '@chakra-ui/react'
-import {
-  FormLabel,
-  FormErrorMessage,
-  FormControl,
-  Textarea
-} from '@chakra-ui/react'
+import { FormLabel, FormErrorMessage, FormControl, Textarea } from '@chakra-ui/react'
 
 type TextareaFieldProps = {
   id: string

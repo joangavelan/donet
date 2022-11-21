@@ -40,10 +40,7 @@ export const Template = ({ originalTask }: TemplateProps) => {
           index
         }))
 
-        const allUpsertedTasks = [
-          ...updatedSourceTasks,
-          ...updatedDestinationTasks
-        ]
+        const allUpsertedTasks = [...updatedSourceTasks, ...updatedDestinationTasks]
 
         upsertTasks.mutate(allUpsertedTasks)
 

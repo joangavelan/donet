@@ -54,11 +54,7 @@ export const LoginForm = () => {
               registration={register('password')}
               type='password'
             />
-            <Button
-              type='submit'
-              colorScheme='orange'
-              isLoading={signIn.isLoading}
-            >
+            <Button type='submit' colorScheme='orange' isLoading={signIn.isLoading}>
               Sign In
             </Button>
           </Stack>

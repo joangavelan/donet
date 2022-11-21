@@ -12,17 +12,9 @@ export const Tasks = ({ templateId, tasks }: TasksProps) => {
   return (
     <Droppable droppableId={String(templateId)}>
       {(droppableProvided) => (
-        <List
-          ref={droppableProvided.innerRef}
-          {...droppableProvided.droppableProps}
-          pt={0.1}
-        >
+        <List ref={droppableProvided.innerRef} {...droppableProvided.droppableProps} pt={0.1}>
           {tasks.map((task, index) => (
-            <Draggable
-              key={task.id}
-              index={index}
-              draggableId={String(task.id)}
-            >
+            <Draggable key={task.id} index={index} draggableId={String(task.id)}>
               {(draggableProvided) => (
                 <ListItem
                   mt={4}

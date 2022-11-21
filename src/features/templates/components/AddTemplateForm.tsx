@@ -55,12 +55,7 @@ export const AddTemplateForm = ({ closeModal }: AddTemplateFormProps) => {
             error={formState.errors.name}
             type='text'
           />
-          <Button
-            type='submit'
-            colorScheme='orange'
-            px={8}
-            isLoading={addTemplate.isLoading}
-          >
+          <Button type='submit' colorScheme='orange' px={8} isLoading={addTemplate.isLoading}>
             Add Template
           </Button>
         </HStack>

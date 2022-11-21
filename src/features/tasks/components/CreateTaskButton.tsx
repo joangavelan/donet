@@ -29,12 +29,7 @@ export const CreateTaskButton = () => {
         Add New Task
       </Button>
 
-      <Modal
-        title='Add New Task'
-        isOpen={isOpen}
-        onClose={onClose}
-        topPosition='12%'
-      >
+      <Modal title='Add New Task' isOpen={isOpen} onClose={onClose} topPosition='12%'>
         <CreateTaskForm templates={templates ?? []} closeModal={onClose} />
       </Modal>
     </React.Fragment>

@@ -1,11 +1,5 @@
 import type { Tasks } from '@/types'
-import {
-  Checkbox,
-  HStack,
-  Stack,
-  Text,
-  useColorModeValue
-} from '@chakra-ui/react'
+import { Checkbox, HStack, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 
 type SubtasksProps = {
   subtasks: Tasks['Row']['subtasks']
@@ -15,10 +9,7 @@ type SubtasksProps = {
 export const Subtasks = ({ subtasks, handleTaskUpdate }: SubtasksProps) => {
   const completedSubtasks = subtasks.filter((subtask) => subtask.is_completed)
 
-  const handleCheck = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    subtaskId: string
-  ) => {
+  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>, subtaskId: string) => {
     const updatedSubtasks = subtasks.map((subtask) => {
       if (subtask.id === subtaskId) {
         return { ...subtask, is_completed: e.target.checked }

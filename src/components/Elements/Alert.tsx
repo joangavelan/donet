@@ -32,20 +32,14 @@ export const Alert = ({
   const cancelRef = React.useRef<HTMLButtonElement>(null)
 
   return (
-    <AlertDialog
-      isOpen={isOpen}
-      leastDestructiveRef={cancelRef}
-      onClose={onClose}
-    >
+    <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
       <AlertDialogOverlay>
         <AlertDialogContent top='20%'>
           <AlertDialogHeader fontSize='lg' fontWeight='bold'>
             {header}
           </AlertDialogHeader>
 
-          <AlertDialogBody
-            color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
-          >
+          <AlertDialogBody color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}>
             {body}
           </AlertDialogBody>
 
@@ -53,12 +47,7 @@ export const Alert = ({
             <Button ref={cancelRef} onClick={onClose}>
               Cancel
             </Button>
-            <Button
-              colorScheme='orange'
-              onClick={onConfirm}
-              isLoading={loadingAction}
-              ml={3}
-            >
+            <Button colorScheme='orange' onClick={onConfirm} isLoading={loadingAction} ml={3}>
               {confirmText}
             </Button>
           </AlertDialogFooter>

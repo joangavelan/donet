@@ -1,13 +1,6 @@
 import type { UseFormRegisterReturn, FieldError } from 'react-hook-form'
 import type { SystemStyleObject } from '@chakra-ui/react'
-import {
-  FormLabel,
-  HStack,
-  Icon,
-  Stack,
-  Input,
-  FormErrorMessage
-} from '@chakra-ui/react'
+import { FormLabel, HStack, Icon, Stack, Input, FormErrorMessage } from '@chakra-ui/react'
 import type { HTMLInputTypeAttribute } from 'react'
 import { IoMdClose } from 'react-icons/io'
 
@@ -36,12 +29,7 @@ export const DynamicInputField = ({
     <Stack sx={sx}>
       {label && <FormLabel htmlFor={id}>{label}</FormLabel>}
       <HStack>
-        <Input
-          id={id}
-          {...registration}
-          placeholder={placeholder}
-          type={type}
-        />
+        <Input id={id} {...registration} placeholder={placeholder} type={type} />
         <Icon
           as={IoMdClose}
           color='#A1ADC0'

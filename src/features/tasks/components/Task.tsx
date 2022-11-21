@@ -20,19 +20,10 @@ type TaskProps = {
 }
 
 export const Task = ({ task }: TaskProps) => {
-  const {
-    isOpen: taskViewIsOpen,
-    onClose: closeTaskView,
-    onOpen: openTaskView
-  } = useDisclosure()
+  const { isOpen: taskViewIsOpen, onClose: closeTaskView, onOpen: openTaskView } = useDisclosure()
 
-  const completedSubtasks = task.subtasks.filter(
-    (subtask) => subtask.is_completed
-  )
-  const progressPercentage = getPercentage(
-    completedSubtasks.length,
-    task.subtasks.length
-  )
+  const completedSubtasks = task.subtasks.filter((subtask) => subtask.is_completed)
+  const progressPercentage = getPercentage(completedSubtasks.length, task.subtasks.length)
 
   return (
     <Stack
@@ -80,9 +71,7 @@ export const Task = ({ task }: TaskProps) => {
       {!!task.subtasks.length && (
         <Stack gap={1}>
           <HStack justify='space-between' fontSize='sm'>
-            <HStack
-              color={useColorModeValue('blackAlpha.800', 'whiteAlpha.700')}
-            >
+            <HStack color={useColorModeValue('blackAlpha.800', 'whiteAlpha.700')}>
               <Icon as={AiOutlineUnorderedList} />
               <Text>Progress</Text>
             </HStack>

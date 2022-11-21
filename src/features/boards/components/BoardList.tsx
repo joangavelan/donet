@@ -1,11 +1,4 @@
-import {
-  Box,
-  HStack,
-  Icon,
-  Stack,
-  Text,
-  useColorModeValue
-} from '@chakra-ui/react'
+import { Box, HStack, Icon, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 import { NavLink } from 'react-router-dom'
 import { MdOutlineSpaceDashboard } from 'react-icons/md'
 import { useBoards } from '../hooks'

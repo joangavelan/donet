@@ -58,12 +58,7 @@ export const CreateBoardForm = ({ closeModal }: CreateBoardFormProps) => {
             error={formState.errors.name}
             type='text'
           />
-          <Button
-            type='submit'
-            colorScheme='orange'
-            isLoading={createBoard.isLoading}
-            px={7}
-          >
+          <Button type='submit' colorScheme='orange' isLoading={createBoard.isLoading} px={7}>
             Create Board
           </Button>
         </HStack>

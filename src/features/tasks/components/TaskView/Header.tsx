@@ -1,11 +1,5 @@
 import { Alert } from '@/components/Elements'
-import {
-  HStack,
-  Icon,
-  Text,
-  useColorModeValue,
-  useDisclosure
-} from '@chakra-ui/react'
+import { HStack, Icon, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { BiArchiveIn } from 'react-icons/bi'
 import { useArchivetask } from '../../hooks'
 
@@ -15,11 +9,7 @@ type HeaderProps = {
 }
 
 export const Header = ({ taskId, children }: HeaderProps) => {
-  const {
-    isOpen,
-    onClose: closeAlertDialog,
-    onOpen: openAlertDialog
-  } = useDisclosure()
+  const { isOpen, onClose: closeAlertDialog, onOpen: openAlertDialog } = useDisclosure()
   const archiveTask = useArchivetask()
 
   const handleArchiveTask = () => {

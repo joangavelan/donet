@@ -1,12 +1,5 @@
 import { Modal } from '@/components/Elements'
-import {
-  Flex,
-  GridItem,
-  Icon,
-  Text,
-  useColorModeValue,
-  useDisclosure
-} from '@chakra-ui/react'
+import { Flex, GridItem, Icon, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { AddTemplateForm } from './AddTemplateForm'
 import * as React from 'react'
 import { TiPlus } from 'react-icons/ti'

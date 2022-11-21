@@ -1,12 +1,5 @@
 import type { Boards } from '@/types'
-import {
-  GridItem,
-  HStack,
-  Icon,
-  Stack,
-  Text,
-  useColorModeValue
-} from '@chakra-ui/react'
+import { GridItem, HStack, Icon, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { NavLink } from 'react-router-dom'
 
@@ -31,11 +24,7 @@ export const BoardItem = ({ id, name, slug }: Boards['Row']) => {
       <Stack as={NavLink} to={slug} p={5}>
         <HStack>
           <Text fontWeight='semibold'>{name}</Text>
-          <Icon
-            as={AiOutlineArrowRight}
-            transition='ease-in-out'
-            transitionDuration='200ms'
-          />
+          <Icon as={AiOutlineArrowRight} transition='ease-in-out' transitionDuration='200ms' />
         </HStack>
       </Stack>
     </GridItem>
