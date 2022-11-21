@@ -36,7 +36,7 @@ export const Header = ({ taskId, children }: HeaderProps) => {
 
       <Alert
         header='Archive'
-        body='Confirm to archive this task.'
+        body='Please confirm to archive task.'
         isOpen={isOpen}
         onClose={closeAlertDialog}
         confirmText='Archive'
