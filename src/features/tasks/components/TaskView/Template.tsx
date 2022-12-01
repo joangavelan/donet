@@ -3,7 +3,7 @@ import { useBoard } from '@/features/boards/hooks'
 import { useTemplates } from '@/features/templates/hooks'
 import type { Tasks } from '@/types'
 import { useUpsertTasks } from '../../hooks'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 
 type TemplateProps = {
   originalTask: Tasks['Row']

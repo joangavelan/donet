@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useNotification } from '@/hooks'
 import { signIn } from '../api'
 import type { AuthError } from '@supabase/supabase-js'

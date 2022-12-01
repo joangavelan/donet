@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async'
 import { AppFeatures } from '@/features/misc/components'
 import { Modal } from '../Elements'
 import { useUser } from '@/features/auth/hooks'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const AppContainer = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, onOpen: openWelcomeModal, onClose } = useDisclosure()

@@ -2,7 +2,7 @@ import type { Tasks } from '@/types'
 import { reorderArray } from '@/utils'
 import { DragDropContext } from 'react-beautiful-dnd'
 import type { DropResult } from 'react-beautiful-dnd'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import { useUpsertTasks } from '../hooks'
 
 export const DndContext = ({ children }: { children: React.ReactNode }) => {

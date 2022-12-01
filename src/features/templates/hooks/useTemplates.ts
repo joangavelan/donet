@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { getTemplates } from '../api'
 
 export const useTemplates = (boardId: number) => {

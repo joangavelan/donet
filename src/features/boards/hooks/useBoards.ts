@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { getBoards } from '../api'
 import type { PostgrestError } from '@supabase/supabase-js'
 import { useNotification } from '@/hooks'

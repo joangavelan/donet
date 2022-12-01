@@ -2,7 +2,7 @@ import { Button, Stack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { Form, InputField } from '@/components/Form'
 import * as z from 'zod'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import { useSignUp } from '../hooks'
 
 const schema = z.object({

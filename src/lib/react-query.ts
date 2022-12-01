@@ -1,7 +1,7 @@
-import type { DefaultOptions } from 'react-query'
-import { QueryClient } from 'react-query'
-import { createWebStoragePersistor } from 'react-query/createWebStoragePersistor-experimental'
-import { persistQueryClient } from 'react-query/persistQueryClient-experimental'
+import type { DefaultOptions } from '@tanstack/react-query'
+import { QueryClient } from '@tanstack/react-query'
+import { persistQueryClient } from '@tanstack/react-query-persist-client'
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
 
 const defaultOptions: DefaultOptions = {
   queries: {
@@ -12,14 +12,13 @@ const defaultOptions: DefaultOptions = {
   }
 }
 
-const localStoragePersistor = createWebStoragePersistor({
+export const queryClient = new QueryClient({ defaultOptions })
+
+const localStoragePersister = createSyncStoragePersister({
   storage: window.localStorage
 })
 
-export const queryClient = new QueryClient({ defaultOptions })
-
-void persistQueryClient({
+persistQueryClient({
   queryClient,
-  persistor: localStoragePersistor,
-  maxAge: 1000 * 60 * 60 * 24
+  persister: localStoragePersister
 })

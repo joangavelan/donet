@@ -15,7 +15,7 @@ import { useCreateTask } from '../hooks'
 import { useNotification } from '@/hooks'
 import { nanoid } from 'nanoid'
 import type { FieldError } from 'react-hook-form'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 
 const schema = z.object({
   title: z.string().trim().min(1, 'Required').max(100, 'Max length is 100 characters'),
