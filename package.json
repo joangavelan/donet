@@ -8,8 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint --fix --ext .js,.ts,.tsx ./src --ignore-path .gitignore",
-    "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|css|json|ts|tsx)\"",
-    "format": "yarn run prettier --write",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",
     "postinstall": "husky install"
   },
   "dependencies": {
@@ -55,11 +54,11 @@
     "vite": "^3.0.7"
   },
   "lint-staged": {
-    "src/**/*.{css,js,ts,tsx,json}": [
-      "yarn prettier"
+    "src/**/*.{js,ts,tsx,json}": [
+      "yarn prettier --write"
     ],
     "src/**/*.{js,ts,tsx}": [
-      "yarn eslint"
+      "yarn eslint --fix"
     ]
   }
 }
