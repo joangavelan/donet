@@ -36,7 +36,7 @@ export const Landing = () => {
           <Text as='h1' fontSize={['3xl', '4xl']} fontWeight='extrabold'>
             Welcome to Donet!
           </Text>
-          <Text fontSize={['md', 'lg']}>Your centralized task management app.</Text>
+          <Text fontSize={['md', 'lg']}>A task management app built with React & Supabase.</Text>
         </Box>
 
         <Image src='/checklist.png' w={[48, 60]} alt='checklist logo' />
