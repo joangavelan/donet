@@ -5,56 +5,56 @@ import type { DropResult } from 'react-beautiful-dnd'
 import { useQueryClient } from '@tanstack/react-query'
 import { useUpsertTasks } from '../hooks'
 
+type Task = Tasks['Row']
+
 export const DndContext = ({ children }: { children: React.ReactNode }) => {
-  const queryCLient = useQueryClient()
+  const queryClient = useQueryClient()
   const upsertTasks = useUpsertTasks()
 
   const handleDragEnd = (result: DropResult) => {
     const { source, destination } = result
 
-    // if user tries to drop in an unknown destination
+    // if the user tries to drop the task in an unknown destination
     if (!destination) return
 
-    // if the user drag and drops back in the same position
+    // if the user drags and drops the task back into the same position
     if (source.droppableId === destination.droppableId && source.index === destination.index) return
 
-    // If the user drops within the same column but in a different position
+    // If the user drops the task within the same template but in a different position
     if (source.droppableId === destination.droppableId && source.index !== destination.index) {
       const templateId = Number(source.droppableId)
 
-      queryCLient.setQueryData(['tasks', templateId], (tasks) => {
-        const reorderedTasks = reorderArray(
-          tasks as Array<Tasks['Row']>,
-          source.index,
-          destination.index
-        ).map((task, index) => ({ ...task, index }))
+      queryClient.setQueryData(['tasks', templateId], (tasks) => {
+        const reorderedTasks = reorderArray(tasks as Task[], source.index, destination.index)
+        const updatedTasks = reorderedTasks.map((task, index) => ({ ...task, index }))
 
-        upsertTasks.mutate(reorderedTasks)
+        // keeps task positions updated on the backend
+        upsertTasks.mutate(updatedTasks)
 
-        return reorderedTasks
+        return updatedTasks
       })
     }
 
-    // If the user moves a task from one column (template) to another
+    // If the user moves a task from one template to another
     if (source.droppableId !== destination.droppableId) {
       const sourceTemplateId = Number(source.droppableId)
       const destinationTemplateId = Number(destination.droppableId)
 
-      queryCLient.setQueryData(['tasks', sourceTemplateId], (tasks) => {
-        const movingTask = (tasks as Array<Tasks['Row']>)[source.index]
+      queryClient.setQueryData(['tasks', sourceTemplateId], (tasks) => {
+        const movingTask = (tasks as Task[])[source.index]
 
-        const updatedSourceTasks = (tasks as Array<Tasks['Row']>)
+        const updatedSourceTasks = (tasks as Task[])
           .filter((task) => task.id !== movingTask.id)
           .map((task, index) => ({ ...task, index }))
 
-        queryCLient.setQueryData(['tasks', destinationTemplateId], (tasks) => {
+        queryClient.setQueryData(['tasks', destinationTemplateId], (tasks) => {
           const updatedMovingTask = {
             ...movingTask,
             template_id: destinationTemplateId,
             index: destination.index
           }
 
-          const destinationTasks = [...(tasks as Array<Tasks['Row']>)]
+          const destinationTasks = [...(tasks as Task[])]
 
           destinationTasks.splice(destination.index, 0, updatedMovingTask)
 
@@ -63,9 +63,9 @@ export const DndContext = ({ children }: { children: React.ReactNode }) => {
             index
           }))
 
-          const allUpsertedTasks = [...updatedSourceTasks, ...updatedDestinationTasks]
+          const allUpdatedTasks = [...updatedSourceTasks, ...updatedDestinationTasks]
 
-          upsertTasks.mutate(allUpsertedTasks)
+          upsertTasks.mutate(allUpdatedTasks)
 
           return updatedDestinationTasks
         })
