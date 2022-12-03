@@ -49,6 +49,7 @@ export const Boards = () => {
       gridTemplateColumns='repeat(4, minmax(max-content, 1fr))'
       gridAutoRows='minmax(min-content, max-content)'
       gap={10}
+      p={7}
       h='100%'
       overflow='scroll'
     >

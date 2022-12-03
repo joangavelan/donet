@@ -21,6 +21,8 @@ export const AddTemplateColumn = () => {
           }
         }}
         cursor='pointer'
+        maxW='330px'
+        h='100%'
       >
         <Flex
           align='center'

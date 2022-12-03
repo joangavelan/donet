@@ -1,58 +1,68 @@
+import * as React from 'react'
 import { useBoard } from '@/features/boards/hooks'
-import { Grid, Spinner, Text } from '@chakra-ui/react'
+import { Box, Grid, Progress, Text } from '@chakra-ui/react'
 import { useTemplates } from '../hooks'
 import { Template } from './Template'
 import { AddTemplateColumn } from './AddTemplateColumn'
+import { ErrorBoundary } from 'react-error-boundary'
 
 export const Templates = () => {
   const board = useBoard()
-  const { data: templates, isLoading, isError } = useTemplates(board.id)
-
-  if (isLoading) {
-    return (
-      <Container>
-        <Spinner size='lg' />
-      </Container>
-    )
-  }
-
-  if (isError) {
-    return (
-      <Container>
-        <Text color='red' fontSize='xl' fontWeight='semibold'>
-          Whoops! An error occurred!
-        </Text>
-      </Container>
-    )
-  }
+  const { data: templates } = useTemplates(board.id)
 
   return (
-    <Grid
-      as='ul'
-      h='100%'
-      gap={4}
-      gridAutoFlow='column'
-      gridAutoColumns='330px'
-      overflow='scroll'
-      sx={{
-        '& div': {
-          borderRadius: 'xl'
-        }
-      }}
-    >
-      {templates?.map((template) => (
-        <Template key={template.id} {...template} />
-      ))}
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <React.Suspense fallback={<SuspenseFallback />}>
+        <Grid
+          as='ul'
+          h='100%'
+          gap={4}
+          gridAutoFlow='column'
+          gridAutoColumns='330px'
+          overflow='scroll'
+          p={7}
+          sx={{
+            '& div': {
+              borderRadius: 'xl'
+            }
+          }}
+        >
+          {templates?.map((template) => (
+            <Template key={template.id} {...template} />
+          ))}
 
-      <AddTemplateColumn />
-    </Grid>
+          <AddTemplateColumn />
+        </Grid>
+      </React.Suspense>
+    </ErrorBoundary>
   )
 }
 
-const Container = ({ children }: { children: React.ReactNode }) => {
+const SuspenseFallback = () => {
+  return (
+    <Box pos='relative' h='100%'>
+      <Box p={7} h='full'>
+        <AddTemplateColumn />
+      </Box>
+      <Progress
+        size='xs'
+        isIndeterminate
+        pos='absolute'
+        top={0}
+        left={0}
+        w='100%'
+        colorScheme='orange'
+      />
+    </Box>
+  )
+}
+
+const ErrorFallback = () => {
   return (
     <Grid placeItems='center' h='100%'>
-      {children}
+      <Text color='red' fontSize='xl' fontWeight='semibold'>
+        Whoops! An error occurred!
+      </Text>
     </Grid>
   )
 }
