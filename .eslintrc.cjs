@@ -9,10 +9,12 @@ module.exports = {
     }
   },
   extends: [
+    'standard-with-typescript',
+    'eslint-config-prettier',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
-    'standard-with-typescript',
-    'eslint-config-prettier'
+    'plugin:testing-library/react',
+    'plugin:jest-dom/recommended'
   ],
   overrides: [],
   parserOptions: {
