@@ -23,7 +23,7 @@ const schema = z.object({
   subtasks: z
     .object({
       id: z.string(),
-      name: z.string().trim().min(1, 'Required').max(50, 'Max length is 50 characters'),
+      name: z.string().trim().min(1, 'Required').max(100, 'Max length is 100 characters'),
       is_completed: z.boolean()
     })
     .array()
