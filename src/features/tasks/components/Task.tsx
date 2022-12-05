@@ -47,7 +47,7 @@ export const Task = ({ task }: TaskProps) => {
           whiteSpace='nowrap'
           textOverflow='ellipsis'
           overflow='hidden'
-          w='max-content'
+          w='full'
           onClick={openTaskView}
         >
           {task.title}
