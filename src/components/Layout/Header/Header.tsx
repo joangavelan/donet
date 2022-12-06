@@ -8,39 +8,23 @@ import {
   Flex,
   Text,
   GridItem,
-  useDisclosure,
   useColorModeValue,
   HStack,
   Box
 } from '@chakra-ui/react'
 import { useSignOut } from '@/features/auth/hooks'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { VscTrash, VscSignOut } from 'react-icons/vsc'
-import { Alert } from '../../Elements'
-import { useBoard, useDeleteBoard } from '@/features/boards/hooks'
+import { VscSignOut } from 'react-icons/vsc'
+import { useBoard } from '@/features/boards/hooks'
 import { CreateTaskButton } from '@/features/tasks/components'
 import { BoardsPopover } from '@/features/boards/components'
 import { Logo } from '../../Logo'
 import { EditBoardMenuItem } from './EditBoardMenuItem'
+import { DeleteBoardMenuItem } from './DeleteBoardMenuItem'
 
 export const Header = () => {
-  const {
-    isOpen: alertDialogIsOpen,
-    onOpen: openAlertDialog,
-    onClose: closeAlertDialog
-  } = useDisclosure()
-
   const board = useBoard()
   const signOut = useSignOut()
-  const deleteBoard = useDeleteBoard()
-
-  const handleDeleteBoard = () => {
-    deleteBoard.mutate(board.id, {
-      onSuccess: () => {
-        closeAlertDialog()
-      }
-    })
-  }
 
   return (
     <GridItem
@@ -82,24 +66,13 @@ export const Header = () => {
           />
           <MenuList sx={{ '.chakra-menu__icon': { fontSize: 'md' } }}>
             <EditBoardMenuItem />
-            <MenuItem isDisabled={!board} onClick={openAlertDialog} icon={<VscTrash />}>
-              Delete Board
-            </MenuItem>
+            <DeleteBoardMenuItem />
             <MenuDivider />
             <MenuItem icon={<VscSignOut />} onClick={() => signOut.mutate()}>
               Sign Out
             </MenuItem>
           </MenuList>
         </Menu>
-
-        <Alert
-          header='Delete board'
-          body='Are you sure you want to delete this board? All templates and tasks within this board will also be deleted.'
-          isOpen={alertDialogIsOpen}
-          onClose={closeAlertDialog}
-          onConfirm={handleDeleteBoard}
-          loadingAction={deleteBoard.isLoading}
-        />
       </Flex>
     </GridItem>
   )
