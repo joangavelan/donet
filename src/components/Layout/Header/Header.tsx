@@ -16,14 +16,20 @@ import {
 import { useSignOut } from '@/features/auth/hooks'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { VscTrash, VscSignOut } from 'react-icons/vsc'
-import { Alert } from '../Elements'
+import { Alert } from '../../Elements'
 import { useBoard, useDeleteBoard } from '@/features/boards/hooks'
 import { CreateTaskButton } from '@/features/tasks/components'
 import { BoardsPopover } from '@/features/boards/components'
-import { Logo } from '../Logo'
+import { Logo } from '../../Logo'
+import { EditBoardMenuItem } from './EditBoardMenuItem'
 
 export const Header = () => {
-  const { isOpen, onOpen: openAlertDialog, onClose: closeAlertDialog } = useDisclosure()
+  const {
+    isOpen: alertDialogIsOpen,
+    onOpen: openAlertDialog,
+    onClose: closeAlertDialog
+  } = useDisclosure()
+
   const board = useBoard()
   const signOut = useSignOut()
   const deleteBoard = useDeleteBoard()
@@ -75,6 +81,7 @@ export const Header = () => {
             size={{ base: 'sm', lg: 'md' }}
           />
           <MenuList sx={{ '.chakra-menu__icon': { fontSize: 'md' } }}>
+            <EditBoardMenuItem />
             <MenuItem isDisabled={!board} onClick={openAlertDialog} icon={<VscTrash />}>
               Delete Board
             </MenuItem>
@@ -88,7 +95,7 @@ export const Header = () => {
         <Alert
           header='Delete board'
           body='Are you sure you want to delete this board? All templates and tasks within this board will also be deleted.'
-          isOpen={isOpen}
+          isOpen={alertDialogIsOpen}
           onClose={closeAlertDialog}
           onConfirm={handleDeleteBoard}
           loadingAction={deleteBoard.isLoading}
