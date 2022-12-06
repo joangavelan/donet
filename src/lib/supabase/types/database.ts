@@ -14,18 +14,21 @@ export interface Database {
           name: string
           slug: string
           user_id: string
+          created_at: string
         }
         Insert: {
           id?: number
           name: string
           slug: string
           user_id: string
+          created_at?: string
         }
         Update: {
           id?: number
           name?: string
           slug?: string
           user_id?: string
+          created_at?: string
         }
       }
       tasks: {
@@ -59,16 +62,19 @@ export interface Database {
           id: number
           name: string
           board_id: number
+          created_at: string
         }
         Insert: {
           id?: number
           name: string
           board_id: number
+          created_at?: string
         }
         Update: {
           id?: number
           name?: string
           board_id?: number
+          created_at?: string
         }
       }
     }
