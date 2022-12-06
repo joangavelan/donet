@@ -40,13 +40,7 @@ export const OneInputForm = ({
             error={formState.errors.name}
             type='text'
           />
-          <Button
-            type='submit'
-            colorScheme='orange'
-            isDisabled={!formState.isDirty}
-            isLoading={isLoading}
-            px={7}
-          >
+          <Button type='submit' colorScheme='orange' isLoading={isLoading} px={8}>
             {submitButtonText}
           </Button>
         </HStack>

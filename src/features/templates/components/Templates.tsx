@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useBoard } from '@/features/boards/hooks'
 import { Box, Grid, Progress, Text } from '@chakra-ui/react'
 import { useTemplates } from '../hooks'
-import { Template } from './Template'
+import { Template } from './Template/Template'
 import { AddTemplateColumn } from './AddTemplateColumn'
 import { ErrorBoundary } from 'react-error-boundary'
 

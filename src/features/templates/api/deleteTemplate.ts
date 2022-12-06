@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase'
 
-export const archiveTemplate = async (templateId: number) => {
-  const { data: archivedTemplate, error } = await supabase
+export const deleteTemplate = async (templateId: number) => {
+  const { data: deletedTemplate, error } = await supabase
     .from('templates')
     .delete()
     .eq('id', templateId)
@@ -10,5 +10,5 @@ export const archiveTemplate = async (templateId: number) => {
 
   if (error) throw error
 
-  return archivedTemplate
+  return deletedTemplate
 }
