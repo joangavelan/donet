@@ -1,11 +1,20 @@
-import { Modal } from '@/components/Elements'
+import { Modal, OneInputForm } from '@/components/Elements'
+import { useBoard } from '@/features/boards/hooks'
+import { useNotification } from '@/hooks'
 import { Flex, GridItem, Icon, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react'
-import { AddTemplateForm } from './AddTemplateForm'
 import * as React from 'react'
 import { TiPlus } from 'react-icons/ti'
+import { useAddTemplate } from '../hooks'
 
 export const AddTemplateColumn = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: addTemplateFormIsOpen,
+    onOpen: openAddTemplateForm,
+    onClose: closeAddTemplateForm
+  } = useDisclosure()
+  const board = useBoard()
+  const addTemplate = useAddTemplate()
+  const showNotification = useNotification()
 
   return (
     <React.Fragment>
@@ -14,7 +23,7 @@ export const AddTemplateColumn = () => {
         display='grid'
         placeItems='center'
         bg={useColorModeValue('orange.50', '#1F2431')}
-        onClick={onOpen}
+        onClick={openAddTemplateForm}
         _hover={{
           svg: {
             color: 'orange.500'
@@ -35,8 +44,29 @@ export const AddTemplateColumn = () => {
         </Flex>
       </GridItem>
 
-      <Modal title='New template' isOpen={isOpen} onClose={onClose}>
-        <AddTemplateForm closeModal={onClose} />
+      <Modal title='New template' isOpen={addTemplateFormIsOpen} onClose={closeAddTemplateForm}>
+        <OneInputForm
+          onSubmit={({ name }) => {
+            addTemplate.mutate(
+              {
+                name,
+                board_id: board.id
+              },
+              {
+                onSuccess: () => {
+                  closeAddTemplateForm()
+                  showNotification({
+                    type: 'success',
+                    message: 'New template added'
+                  })
+                }
+              }
+            )
+          }}
+          placeholderText='e.g: In Progress'
+          submitButtonText='Add template'
+          isLoading={addTemplate.isLoading}
+        />
       </Modal>
     </React.Fragment>
   )

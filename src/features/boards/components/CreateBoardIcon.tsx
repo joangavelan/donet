@@ -5,7 +5,11 @@ import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { CreateBoardForm } from './CreateBoardForm'
 
 export const CreateBoardIcon = () => {
-  const { isOpen, onOpen: openCreateBoardForm, onClose } = useDisclosure()
+  const {
+    isOpen: createBoardFormIsOpen,
+    onOpen: openCreateBoardForm,
+    onClose: closeCreateBoardForm
+  } = useDisclosure()
 
   return (
     <React.Fragment>
@@ -19,8 +23,8 @@ export const CreateBoardIcon = () => {
         onClick={openCreateBoardForm}
       />
 
-      <Modal title='New Board' isOpen={isOpen} onClose={onClose}>
-        <CreateBoardForm closeModal={onClose} />
+      <Modal title='New Board' isOpen={createBoardFormIsOpen} onClose={closeCreateBoardForm}>
+        <CreateBoardForm closeModal={closeCreateBoardForm} />
       </Modal>
     </React.Fragment>
   )
