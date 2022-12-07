@@ -7,19 +7,19 @@ import { useUpsertTasks } from './useUpsertTasks'
 
 type Task = Tasks['Row']
 
-export const useArchivetask = () => {
+export const useDeletetask = () => {
   const showNotification = useNotification()
   const queryClient = useQueryClient()
   const upsertTasks = useUpsertTasks()
 
   return useMutation(deleteTask, {
-    onSuccess: async (archivedTask) => {
-      showNotification({ type: 'success', message: 'Task archived' })
+    onSuccess: async (deletedTask) => {
+      showNotification({ type: 'success', message: 'Task deleted' })
 
       // update indexes of remaining tasks
-      queryClient.setQueryData(['tasks', archivedTask.template_id], (tasks) => {
+      queryClient.setQueryData(['tasks', deletedTask.template_id], (tasks) => {
         const updatedTasks = (tasks as Task[])
-          .filter((task) => task.id !== archivedTask.id)
+          .filter((task) => task.id !== deletedTask.id)
           .map((task, index) => ({ ...task, index }))
 
         upsertTasks.mutate(updatedTasks)

@@ -1,4 +1,4 @@
-export * from './archiveTask'
+export * from './deleteTask'
 export * from './createTask'
 export * from './getTasks'
 export * from './updateTask'

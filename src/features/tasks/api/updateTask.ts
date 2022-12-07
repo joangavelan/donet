@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase'
 import type { Tasks } from '@/types'
 
-export const updateTask = async (task: Tasks['Row']) => {
+export const updateTask = async (task: Tasks['Update']) => {
   const { data: updatedTask, error } = await supabase
     .from('tasks')
     .update(task)

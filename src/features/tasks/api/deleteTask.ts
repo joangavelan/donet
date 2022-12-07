@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase'
 
 export const deleteTask = async (taskId: number) => {
-  const { data: archivedTask, error } = await supabase
+  const { data: deletedTask, error } = await supabase
     .from('tasks')
     .delete()
     .eq('id', taskId)
@@ -10,5 +10,5 @@ export const deleteTask = async (taskId: number) => {
 
   if (error) throw error
 
-  return archivedTask
+  return deletedTask
 }
