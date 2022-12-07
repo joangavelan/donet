@@ -5,8 +5,10 @@ import type { Tasks } from '@/types'
 import { useUpsertTasks } from '../../hooks'
 import { useQueryClient } from '@tanstack/react-query'
 
+type Task = Tasks['Row']
+
 type TemplateProps = {
-  originalTask: Tasks['Row']
+  originalTask: Task
 }
 
 export const Template = ({ originalTask }: TemplateProps) => {
@@ -20,12 +22,12 @@ export const Template = ({ originalTask }: TemplateProps) => {
     const destinationTemplateId = Number(e.target.value)
 
     queryClient.setQueryData(['tasks', sourceTemplateId], (tasks) => {
-      const updatedSourceTasks = (tasks as Array<Tasks['Row']>)
+      const updatedSourceTasks = (tasks as Task[])
         .filter((task) => task.id !== originalTask.id)
         .map((task, index) => ({ ...task, index }))
 
       queryClient.setQueryData(['tasks', destinationTemplateId], (tasks) => {
-        const destinationTasks = [...(tasks as Array<Tasks['Row']>)]
+        const destinationTasks = [...(tasks as Task[])]
 
         const updatedMovingTask = {
           ...originalTask,
