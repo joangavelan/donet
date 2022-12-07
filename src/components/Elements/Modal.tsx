@@ -25,7 +25,7 @@ export const Modal = ({
   sx
 }: ModalProps) => {
   return (
-    <ModalContainer isOpen={isOpen} onClose={onClose} size='lg'>
+    <ModalContainer isOpen={isOpen} onClose={onClose} size='lg' blockScrollOnMount={false}>
       <ModalOverlay />
       <ModalContent top={topPosition} pb={4} pt={title ? 0 : 4} sx={sx} w='90%'>
         {title && <ModalHeader>{title}</ModalHeader>}
