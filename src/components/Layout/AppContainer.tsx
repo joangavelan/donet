@@ -32,7 +32,7 @@ export const AppContainer = ({ children }: { children: React.ReactNode }) => {
           lg: `"aside header"
                 "aside main"`
         }}
-        gridTemplateColumns={{ base: '1fr', lg: '400px 1fr' }}
+        gridTemplateColumns={{ base: '1fr', lg: '370px 1fr' }}
         gridTemplateRows={'100px 1fr'}
         h='100vh'
       >
