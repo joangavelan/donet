@@ -34,21 +34,23 @@ export const Task = ({ task }: TaskProps) => {
       shadow='md'
       gap={2}
       borderRadius='lg'
+      _hover={{
+        '& h4': {
+          color: useColorModeValue('orange.700', 'orange.200')
+        }
+      }}
+      onClick={openTaskView}
+      cursor='pointer'
     >
       {/* header */}
       <Stack>
         <Text
           as='h4'
           fontWeight='semibold'
-          _hover={{
-            color: useColorModeValue('orange.700', 'orange.200')
-          }}
-          cursor='pointer'
           whiteSpace='nowrap'
           textOverflow='ellipsis'
           overflow='hidden'
           w='full'
-          onClick={openTaskView}
         >
           {task.title}
         </Text>
