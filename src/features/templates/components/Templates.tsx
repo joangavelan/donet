@@ -26,13 +26,7 @@ export const Templates = () => {
       gap={4}
       gridAutoFlow='column'
       gridAutoColumns='330px'
-      overflow='scroll'
       p={7}
-      sx={{
-        '& div': {
-          borderRadius: 'xl'
-        }
-      }}
     >
       {isLoading && (
         <Progress

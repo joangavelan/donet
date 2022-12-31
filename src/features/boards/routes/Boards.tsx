@@ -51,7 +51,6 @@ export const Boards = () => {
       gap={10}
       p={7}
       h='100%'
-      overflow='scroll'
     >
       {boards.map((board) => (
         <BoardItem key={board.id} {...board} />
