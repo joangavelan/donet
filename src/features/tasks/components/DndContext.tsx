@@ -28,8 +28,7 @@ export const DndContext = ({ children }: { children: React.ReactNode }) => {
         const reorderedTasks = reorderArray(tasks as Task[], source.index, destination.index)
         const updatedTasks = reorderedTasks.map((task, index) => ({ ...task, index }))
 
-        // keeps task positions updated on the backend
-        upsertTasks.mutate(updatedTasks)
+        upsertTasks.mutate(updatedTasks) // updates tasks on the backend
 
         return updatedTasks
       })
