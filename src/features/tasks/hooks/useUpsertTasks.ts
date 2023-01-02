@@ -8,11 +8,9 @@ export const useUpsertTasks = () => {
   const showNotification = useNotification()
 
   return useMutation(upsertTasks, {
-    onError: (error) => {
+    onError: async (error) => {
       const { message } = error as PostgrestError
       showNotification({ type: 'error', message })
-    },
-    onSettled: async () => {
       await queryClient.invalidateQueries(['tasks'])
     }
   })
