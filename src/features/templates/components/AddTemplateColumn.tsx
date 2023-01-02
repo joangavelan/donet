@@ -1,4 +1,4 @@
-import { Modal, OneInputForm } from '@/components/Elements'
+import { Modal, SingleInputForm } from '@/components/Elements'
 import { useBoard } from '@/features/boards/hooks'
 import { useNotification } from '@/hooks'
 import { Flex, GridItem, Icon, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react'
@@ -45,7 +45,7 @@ export const AddTemplateColumn = () => {
       </GridItem>
 
       <Modal title='New template' isOpen={addTemplateFormIsOpen} onClose={closeAddTemplateForm}>
-        <OneInputForm
+        <SingleInputForm
           onSubmit={({ name }) => {
             addTemplate.mutate(
               {

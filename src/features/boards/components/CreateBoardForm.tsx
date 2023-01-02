@@ -1,4 +1,4 @@
-import { OneInputForm } from '@/components/Elements'
+import { SingleInputForm } from '@/components/Elements'
 import { useUser } from '@/features/auth/hooks'
 import { useNotification } from '@/hooks'
 import { useNavigate } from 'react-router-dom'
@@ -16,7 +16,7 @@ export const CreateBoardForm = ({ closeModal }: CreateBoardFormProps) => {
   const navigate = useNavigate()
 
   return (
-    <OneInputForm
+    <SingleInputForm
       onSubmit={({ name }) => {
         const slug = slugify(name, { lower: true })
 

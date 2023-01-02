@@ -1,4 +1,4 @@
-import { Modal, OneInputForm } from '@/components/Elements'
+import { Modal, SingleInputForm } from '@/components/Elements'
 import { useBoard, useUpdateBoard } from '@/features/boards/hooks'
 import { MenuItem, useDisclosure } from '@chakra-ui/react'
 import * as React from 'react'
@@ -25,7 +25,7 @@ export const EditBoardMenuItem = () => {
       </MenuItem>
 
       <Modal title='Edit Board' isOpen={editBoardFormIsOpen} onClose={closeEditBoardForm}>
-        <OneInputForm
+        <SingleInputForm
           defaultValues={{ name: board?.name }}
           onSubmit={({ name }) => {
             const slug = slugify(name, { lower: true })

@@ -1,4 +1,4 @@
-import { Modal, OneInputForm } from '@/components/Elements'
+import { Modal, SingleInputForm } from '@/components/Elements'
 import { useNotification } from '@/hooks'
 import { MenuItem, useDisclosure } from '@chakra-ui/react'
 import * as React from 'react'
@@ -27,7 +27,7 @@ export const EditTemplateMenuItem = ({ templateId, templateName }: EditTemplateM
       </MenuItem>
 
       <Modal title='Edit template' isOpen={editTemplateFormIsOpen} onClose={closeEditTemplateForm}>
-        <OneInputForm
+        <SingleInputForm
           onSubmit={({ name }) => {
             updateTemplate.mutate(
               { id: templateId, name },

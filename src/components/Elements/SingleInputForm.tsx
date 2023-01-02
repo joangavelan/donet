@@ -14,7 +14,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
-type OneInputFormProps = {
+type SingleInputFormProps = {
   onSubmit: SubmitHandler<FormValues>
   submitButtonText: string
   placeholderText?: string
@@ -22,13 +22,13 @@ type OneInputFormProps = {
   isLoading?: boolean
 }
 
-export const OneInputForm = ({
+export const SingleInputForm = ({
   onSubmit,
   placeholderText,
   submitButtonText,
   defaultValues,
   isLoading
-}: OneInputFormProps) => {
+}: SingleInputFormProps) => {
   return (
     <Form<FormValues> schema={schema} onSubmit={onSubmit} options={{ defaultValues }}>
       {({ register, formState }) => (
