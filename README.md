@@ -2,7 +2,7 @@
 
 A full-stack task management app built with React & Supabase.
 
-![App Screenshot](public/donet.png)
+![App Screenshot](https://raw.githubusercontent.com/joangavelan/donet/main/public/donet.png)
 
 ## Table of contents
 
